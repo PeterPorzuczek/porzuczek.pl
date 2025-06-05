@@ -1,0 +1,461 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom Font Faces */
+@font-face {
+  font-family: 'Basalte-Fond';
+  src: url('/Basalte-Fond.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Abordage';
+  src: url('/Abordage-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Typefesse Claire-Obscure';
+  src: url('/Typefesse_Claire-Obscure.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Karrik';
+  src: url('/Karrik-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Typography */
+body {
+  font-family: 'Karrik', Arial, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6,
+.font-headers {
+  font-family: 'Typefesse Claire-Obscure', Arial, sans-serif;
+}
+
+.font-abordage {
+  font-family: 'Abordage', Arial, sans-serif;
+}
+
+.font-basalt {
+  font-family: 'Basalte-Fond', Arial, sans-serif;
+}
+
+.font-karrik {
+  font-family: 'Karrik', Arial, sans-serif;
+}
+
+.font-typefesse {
+  font-family: 'Typefesse Claire-Obscure', Arial, sans-serif;
+}
+
+/* Beautiful Static Gradients */
+.holo-gradient {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  transition: all 0.3s ease;
+}
+
+.holo-gradient:hover {
+  background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
+  transform: translateY(-1px);
+}
+
+.holo-text {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transition: all 0.3s ease;
+}
+
+.holo-text:hover {
+  background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 50%, #ec4899 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 2px 4px rgba(102, 126, 234, 0.3));
+}
+
+.holo-text-subtle {
+  background: linear-gradient(135deg, #6b7280 0%, #667eea 50%, #6b7280 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transition: all 0.3s ease;
+}
+
+.holo-text-subtle:hover {
+  background: linear-gradient(135deg, #4b5563 0%, #5a67d8 50%, #4b5563 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Different gradient colors for each header */
+.holo-text-life {
+  background: linear-gradient(135deg, #10b981 0%, #34d399 50%, #6ee7b7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transition: all 0.3s ease;
+}
+
+.holo-text-experience {
+  background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 50%, #fcd34d 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transition: all 0.3s ease;
+}
+
+.holo-text-projects {
+  background: linear-gradient(135deg, #0ea5e9 0%, #38bdf8 50%, #7dd3fc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transition: all 0.3s ease;
+}
+
+.holo-text-together {
+  background: linear-gradient(135deg, #ec4899 0%, #f472b6 50%, #fb7185 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transition: all 0.3s ease;
+}
+
+.holo-text-links {
+  background: linear-gradient(135deg, #06b6d4 0%, #22d3ee 50%, #67e8f9 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transition: all 0.3s ease;
+}
+
+.holo-text-status {
+  background: linear-gradient(135deg, #ef4444 0%, #f87171 50%, #fca5a5 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transition: all 0.3s ease;
+}
+
+.holo-text-beyond {
+  background: linear-gradient(135deg, #ef4444 0%, #f87171 50%, #fca5a5 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transition: all 0.3s ease;
+}
+
+/* Matching underline gradients for each header */
+.holo-gradient-life {
+  background: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+  transition: all 0.3s ease;
+}
+
+.holo-gradient-experience {
+  background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
+  transition: all 0.3s ease;
+}
+
+.holo-gradient-projects {
+  background: linear-gradient(135deg, #0ea5e9 0%, #38bdf8 100%);
+  transition: all 0.3s ease;
+}
+
+.holo-gradient-together {
+  background: linear-gradient(135deg, #ec4899 0%, #f472b6 100%);
+  transition: all 0.3s ease;
+}
+
+.holo-gradient-links {
+  background: linear-gradient(135deg, #06b6d4 0%, #22d3ee 100%);
+  transition: all 0.3s ease;
+}
+
+.holo-gradient-status {
+  background: linear-gradient(135deg, #ef4444 0%, #f87171 100%);
+  transition: all 0.3s ease;
+}
+
+.holo-gradient-beyond {
+  background: linear-gradient(135deg, #ef4444 0%, #f87171 100%);
+  transition: all 0.3s ease;
+}
+
+.holo-dot {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 50%;
+  box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
+  transition: all 0.3s ease;
+}
+
+.holo-dot:hover {
+  background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
+  box-shadow: 0 6px 12px rgba(102, 126, 234, 0.4);
+  transform: scale(1.1);
+}
+
+.holo-dot-2 {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  border-radius: 50%;
+  box-shadow: 0 4px 8px rgba(240, 147, 251, 0.3);
+  transition: all 0.3s ease;
+}
+
+.holo-dot-2:hover {
+  background: linear-gradient(135deg, #ec4899 0%, #ef4444 100%);
+  box-shadow: 0 6px 12px rgba(240, 147, 251, 0.4);
+  transform: scale(1.1);
+}
+
+.holo-dot-3 {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  border-radius: 50%;
+  box-shadow: 0 4px 8px rgba(79, 172, 254, 0.3);
+  transition: all 0.3s ease;
+}
+
+.holo-dot-3:hover {
+  background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
+  box-shadow: 0 6px 12px rgba(79, 172, 254, 0.4);
+  transform: scale(1.1);
+}
+
+.holo-pulse {
+  background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+  border-radius: 50%;
+  box-shadow: 0 4px 8px rgba(168, 237, 234, 0.3);
+  transition: all 0.3s ease;
+}
+
+.holo-pulse:hover {
+  background: linear-gradient(135deg, #7dd3fc 0%, #fbbf24 100%);
+  box-shadow: 0 6px 12px rgba(168, 237, 234, 0.4);
+}
+
+.holo-glow {
+  background: radial-gradient(circle, rgba(102, 126, 234, 0.2), rgba(118, 75, 162, 0.1), transparent);
+  border-radius: 50%;
+  filter: blur(8px);
+  transition: all 0.3s ease;
+}
+
+.holo-glow:hover {
+  background: radial-gradient(circle, rgba(102, 126, 234, 0.3), rgba(118, 75, 162, 0.2), transparent);
+  opacity: 0.8;
+}
+
+.holo-overlay {
+  background: linear-gradient(135deg, 
+    rgba(102, 126, 234, 0.1), 
+    rgba(118, 75, 162, 0.08), 
+    rgba(240, 147, 251, 0.06), 
+    rgba(79, 172, 254, 0.08));
+  transition: all 0.3s ease;
+}
+
+.holo-overlay:hover {
+  background: linear-gradient(135deg, 
+    rgba(102, 126, 234, 0.15), 
+    rgba(118, 75, 162, 0.12), 
+    rgba(240, 147, 251, 0.1), 
+    rgba(79, 172, 254, 0.12));
+}
+
+.holo-orb {
+  background: radial-gradient(circle, 
+    rgba(102, 126, 234, 0.15), 
+    rgba(79, 172, 254, 0.1), 
+    rgba(168, 237, 234, 0.05), 
+    transparent);
+  border-radius: 50%;
+  filter: blur(20px);
+}
+
+.holo-orb-2 {
+  background: radial-gradient(circle, 
+    rgba(240, 147, 251, 0.15), 
+    rgba(245, 87, 108, 0.1), 
+    rgba(254, 214, 227, 0.05), 
+    transparent);
+  border-radius: 50%;
+  filter: blur(15px);
+}
+
+.holo-orb-3 {
+  background: radial-gradient(circle, 
+    rgba(168, 237, 234, 0.15), 
+    rgba(79, 172, 254, 0.1), 
+    rgba(102, 126, 234, 0.05), 
+    transparent);
+  border-radius: 50%;
+  filter: blur(12px);
+}
+
+.holo-project-bg {
+  background: linear-gradient(135deg, 
+    rgba(102, 126, 234, 0.05), 
+    rgba(118, 75, 162, 0.03), 
+    rgba(240, 147, 251, 0.02), 
+    rgba(79, 172, 254, 0.04));
+  transition: all 0.3s ease;
+}
+
+.holo-project-bg:hover {
+  background: linear-gradient(135deg, 
+    rgba(102, 126, 234, 0.08), 
+    rgba(118, 75, 162, 0.06), 
+    rgba(240, 147, 251, 0.04), 
+    rgba(79, 172, 254, 0.07));
+}
+
+/* Beautiful Project accent colors */
+.holo-blue {
+  transition: all 0.3s ease;
+}
+
+.holo-blue:hover {
+  border-color: #667eea;
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+  transform: translateY(-2px);
+}
+
+.holo-purple {
+  transition: all 0.3s ease;
+}
+
+.holo-purple:hover {
+  border-color: #764ba2;
+  box-shadow: 0 8px 25px rgba(118, 75, 162, 0.3);
+  transform: translateY(-2px);
+}
+
+.holo-green {
+  transition: all 0.3s ease;
+}
+
+.holo-green:hover {
+  border-color: #4facfe;
+  box-shadow: 0 8px 25px rgba(79, 172, 254, 0.3);
+  transform: translateY(-2px);
+}
+
+.holo-pink {
+  transition: all 0.3s ease;
+}
+
+.holo-pink:hover {
+  border-color: #f093fb;
+  box-shadow: 0 8px 25px rgba(240, 147, 251, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Clean animations removed - using simple transitions only */
+
+/* Minimal transitions for essential interactions */
+a,
+button {
+  transition: opacity 0.3s ease, transform 0.3s ease, filter 0.3s ease;
+}
+
+a:hover,
+button:hover {
+  transform: translateY(-1px);
+}
+
+/* Beautiful selection */
+::selection {
+  background: #000000;
+  color: #ffffff;
+}
+
+/* Colorful scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f8fafc;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
+}
+
+/* Typography scale */
+h1 {
+  font-weight: 900;
+  line-height: 0.9;
+  letter-spacing: -0.05em;
+}
+
+h2 {
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+h3 {
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
