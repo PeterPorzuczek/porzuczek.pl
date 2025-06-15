@@ -3,7 +3,36 @@
 import { useState, useEffect } from "react"
 import { Github, Linkedin, Instagram, ExternalLink, ArrowUpRight, ChevronUp } from "lucide-react"
 
-export default function PortfolioClient({ data }: { data: any }) {
+export default function PortfolioClient({ data: initialData }: { data: any }) {
+  const [data, setData] = useState(initialData);
+  const [showScrollTop, setShowScrollTop] = useState(false)
+  const [fontsLoaded, setFontsLoaded] = useState(false)
+
+  // Fetch fresh data from GitHub after component mounts
+  useEffect(() => {
+    const fetchFreshData = async () => {
+      try {
+        const remoteDataUrl = `https://raw.githubusercontent.com/PeterPorzuczek/porzuczek.pl/refs/heads/main/public/portfolio-data.json?v=${new Date().getTime()}`;
+        const response = await fetch(remoteDataUrl);
+        if (response.ok) {
+          const freshData = await response.json();
+          // Update copyright year
+          if (freshData?.contactInfo?.footer) {
+            freshData.contactInfo.footer.copyright = `© ${new Date().getFullYear()} PIOTR PORZUCZEK`;
+          }
+          setData(freshData);
+          console.log('Successfully fetched fresh data from GitHub.');
+        } else {
+          console.warn('Failed to fetch fresh data, using initial data.');
+        }
+      } catch (error) {
+        console.warn('Error fetching fresh data, using initial data:', error);
+      }
+    };
+
+    fetchFreshData();
+  }, []);
+
   const { 
     personalInfo, 
     socialLinks, 
@@ -14,9 +43,6 @@ export default function PortfolioClient({ data }: { data: any }) {
     contactInfo,
     loadingScreen
   } = data;
-
-  const [showScrollTop, setShowScrollTop] = useState(false)
-  const [fontsLoaded, setFontsLoaded] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
