@@ -2,7 +2,7 @@ import type React from "react"
 import type { Metadata } from "next"
 import { JetBrains_Mono } from "next/font/google"
 import "./globals.css"
-import { metadata as portfolioMetadata } from "@/lib/portfolio-data"
+import { getPortfolioData } from "@/lib/portfolio-data"
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
@@ -10,12 +10,15 @@ const jetbrainsMono = JetBrains_Mono({
   variable: "--font-mono",
 })
 
-export const metadata: Metadata = {
-  title: portfolioMetadata.title,
-  description: portfolioMetadata.description,
-  keywords: portfolioMetadata.keywords,
-  authors: portfolioMetadata.authors,
-  generator: portfolioMetadata.generator
+export async function generateMetadata(): Promise<Metadata> {
+  const { metadata } = await getPortfolioData();
+  return {
+    title: metadata.title,
+    description: metadata.description,
+    keywords: metadata.keywords,
+    authors: metadata.authors,
+    generator: metadata.generator
+  }
 }
 
 export default function RootLayout({
