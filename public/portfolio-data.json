@@ -23,8 +23,7 @@
     "title": "PIOTR PORZUCZEK - FRONTEND DEVELOPER",
     "description": "Frontend Developer, University Lecturer, and Creative Technologist from Gdańsk, Poland.",
     "keywords": ["Frontend Developer", "Vue.js", "JavaScript", "University Lecturer", "Gdańsk", "Poland"],
-    "authors": [{ "name": "Piotr Porzuczek" }],
-    "generator": "v0.dev"
+    "authors": [{ "name": "Piotr Porzuczek" }]
   },
   "socialLinks": {
     "github": {
