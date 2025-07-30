@@ -162,6 +162,22 @@ h1, h2, h3, h4, h5, h6,
   transition: all 0.3s ease;
 }
 
+.holo-text-articles {
+  background: linear-gradient(135deg, #78e90e 0%, #383bf8 50%, #fc7dd2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transition: all 0.3s ease;
+}
+
+.holo-text-blog {
+  background: linear-gradient(135deg, #e95e0e 0%, #f838d8 50%, #fafc7d 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transition: all 0.3s ease;
+}
+
 .holo-text-together {
   background: linear-gradient(135deg, #ec4899 0%, #f472b6 50%, #fb7185 100%);
   -webkit-background-clip: text;
@@ -207,6 +223,16 @@ h1, h2, h3, h4, h5, h6,
 
 .holo-gradient-projects {
   background: linear-gradient(135deg, #0ea5e9 0%, #38bdf8 100%);
+  transition: all 0.3s ease;
+}
+
+.holo-gradient-articles {
+  background: linear-gradient(135deg, #78e90e 0%, #383bf8 50%, #fc7dd2 100%);
+  transition: all 0.3s ease;
+}
+
+.holo-gradient-blog {
+  background: linear-gradient(135deg, #e95e0e 0%, #f838d8 50%, #fafc7d 100%);
   transition: all 0.3s ease;
 }
 
@@ -459,3 +485,24 @@ html {
   scroll-behavior: smooth;
 }
 
+.holo-header {
+  position: fixed;
+  width: 100%;
+  z-index: 999;
+  background: white;
+}
+
+.holo-hero {
+  padding-top: 150px;
+}
+
+#articles-viewer h1, #articles-viewer h2, #articles-viewer h3, #articles-viewer h4, #articles-viewer h5, #articles-viewer h6, #articles-viewer .font-headers,
+#blog-viewer h1, #blog-viewer h2, #blog-viewer h3, #blog-viewer h4, #blog-viewer h5, #blog-viewer h6, #blog-viewer .font-headers {
+  font-family: __JetBrains_Mono_380c2d !important;
+}
+
+#articles-viewer *,
+#blog-viewer * {
+  border-color: #000000 !important;
+  text-align: justify;
+}

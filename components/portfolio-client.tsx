@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { Github, Linkedin, Instagram, ExternalLink, ArrowUpRight, ChevronUp } from "lucide-react"
+import MarkdownsPeekViewer from './markdowns-peek-viewer'
 
 export default function PortfolioClient({ data: initialData }: { data: any }) {
   const [data, setData] = useState(initialData);
@@ -33,15 +34,16 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
     fetchFreshData();
   }, []);
 
-  const { 
-    personalInfo, 
-    socialLinks, 
+    const {
+    personalInfo,
+    socialLinks,
     photos,
-    projects, 
-    workExperience, 
-    navigation, 
+    projects,
+    workExperience,
+    navigation,
     contactInfo,
-    loadingScreen
+    loadingScreen,
+    sections
   } = data;
 
   useEffect(() => {
@@ -96,7 +98,7 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
       </div>
 
       {/* Header */}
-      <header className="p-8 border-b-2 border-black relative z-10">
+      <header className="holo-header p-8 border-b-2 border-black relative z-10">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <a href="/" className="text-2xl font-black tracking-tight relative hover:opacity-80 transition-opacity">
             {personalInfo.title}
@@ -114,15 +116,15 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
       </header>
 
       {/* Hero */}
-      <section className="p-8 relative z-10">
+      <section className="holo-hero p-8 relative z-10">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-16 items-start">
             <div className="space-y-8">
               <div>
                 <h1 className="text-6xl md:text-8xl font-black leading-none mb-4 tracking-tighter relative">
-                  GLAD YOU'RE
+                  {sections?.hero?.title?.first}
                   <br />
-                  <span className="holo-text">HERE</span>
+                  <span className="holo-text">{sections?.hero?.title?.second}</span>
                 </h1>
               </div>
 
@@ -161,13 +163,13 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
             <div className="space-y-6">
               <div className="text-center">
                 <h3 className="text-2xl font-black uppercase tracking-wider relative">
-                  MY <span className="holo-text-life">LIFE</span>
+                  {sections?.photos?.title?.first} <span className="holo-text-life">{sections?.photos?.title?.second}</span>
                   <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-16 h-0.5 holo-gradient-life"></div>
                 </h3>
               </div>
               
               <div className="grid grid-cols-2 gap-4">
-                {photos.map((photo, index) => (
+                {photos.sort(() => Math.random() - 0.5).slice(0, 4).map((photo, index) => (
                   <a
                     key={index}
                     href={socialLinks.instagram.url}
@@ -195,11 +197,53 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
         </div>
       </section>
 
+      {/* Blog */}
+      {sections?.blog?.enabled && sections.blog.markdownsPeek?.repo && (
+        <section id="blog" className="p-8 border-t-2 border-black relative z-10">
+          <div className="max-w-7xl mx-auto">
+            <h2 className="text-4xl font-black mb-12 uppercase tracking-tighter relative">
+              {sections?.blog?.title?.first} <span className="holo-text-blog">{sections?.blog?.title?.second}</span>
+              <div className="absolute -bottom-2 left-0 w-24 h-1 holo-gradient-blog"></div>
+            </h2>
+
+            <div className="bg-white overflow-hidden">
+              <MarkdownsPeekViewer
+                containerId={sections.blog.markdownsPeek.containerId}
+                owner={sections.blog.markdownsPeek.owner}
+                repo={sections.blog.markdownsPeek.repo}
+                path={sections.blog.markdownsPeek.path}
+                branch={sections.blog.markdownsPeek.branch}
+                theme={sections.blog.markdownsPeek.theme}
+                token={sections.blog.markdownsPeek.token}
+                className={sections.blog.markdownsPeek.className}
+              />
+              <div className="relative w-100 h-1 holo-gradient-blog"></div>
+            </div>
+
+            <div className="mt-8 text-center">
+              <p className="text-sm text-gray-600 mb-4">
+                {sections.blog.subtitle}
+              </p>
+              <a
+                href={`${socialLinks.github.url}/${sections.blog.githubLink}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wider hover:underline relative group"
+              >
+                {sections.blog.githubButtonText}
+                <ExternalLink size={16} />
+                <div className="absolute -inset-2 holo-glow opacity-0 group-hover:opacity-30 transition-opacity duration-300"></div>
+              </a>
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Work Experience */}
       <section id="work" className="p-8 border-t-2 border-black relative z-10">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-4xl font-black mb-12 uppercase tracking-tighter relative">
-            WORK <span className="holo-text-experience">EXPERIENCE</span>
+            {sections?.work?.title?.first} <span className="holo-text-experience">{sections?.work?.title?.second}</span>
             <div className="absolute -bottom-2 left-0 w-24 h-1 holo-gradient-experience"></div>
           </h2>
 
@@ -232,16 +276,58 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
         </div>
       </section>
 
+      {/* Articles */}
+      {sections?.articles?.enabled && sections.articles.markdownsPeek?.repo && (
+        <section id="articles" className="p-8 border-t-2 border-black relative z-10">
+          <div className="max-w-7xl mx-auto">
+            <h2 className="text-4xl font-black mb-12 uppercase tracking-tighter relative">
+              {sections?.articles?.title?.first} <span className="holo-text-articles">{sections?.articles?.title?.second}</span>
+              <div className="absolute -bottom-2 left-0 w-24 h-1 holo-gradient-articles"></div>
+            </h2>
+
+            <div className="bg-white overflow-hidden">
+              <MarkdownsPeekViewer
+                containerId={sections.articles.markdownsPeek.containerId}
+                owner={sections.articles.markdownsPeek.owner}
+                repo={sections.articles.markdownsPeek.repo}
+                path={sections.articles.markdownsPeek.path}
+                branch={sections.articles.markdownsPeek.branch}
+                theme={sections.articles.markdownsPeek.theme}
+                token={sections.articles.markdownsPeek.token}
+                className={sections.articles.markdownsPeek.className}
+              />
+              <div className="relative w-100 h-1 holo-gradient-articles"></div>
+            </div>
+
+            <div className="mt-8 text-center">
+              <p className="text-sm text-gray-600 mb-4">
+                {sections.articles.subtitle}
+              </p>
+              <a
+                href={`${socialLinks.github.url}/${sections.articles.githubLink}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wider hover:underline relative group"
+              >
+                {sections.articles.githubButtonText}
+                <ExternalLink size={16} />
+                <div className="absolute -inset-2 holo-glow opacity-0 group-hover:opacity-30 transition-opacity duration-300"></div>
+              </a>
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Projects */}
       <section id="projects" className="p-8 border-t-2 border-black relative z-10">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-4xl font-black mb-12 uppercase tracking-tighter relative">
-            SELECTED <span className="holo-text-projects">PROJECTS</span>
+            {sections?.projects?.title?.first} <span className="holo-text-projects">{sections?.projects?.title?.second}</span>
             <div className="absolute -bottom-2 left-0 w-24 h-1 holo-gradient-projects"></div>
           </h2>
 
           <div className="grid md:grid-cols-2 gap-8">
-            {projects.map((project, index) => (
+            {projects.sort(() => Math.random() - 0.5).map((project, index) => (
               <a
                 key={index}
                 href={project.url}
@@ -276,7 +362,7 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wider hover:underline relative group"
             >
-              VIEW ALL PROJECTS ON GITHUB
+              {sections?.projects?.githubButtonText}
               <ExternalLink size={16} />
               <div className="absolute -inset-2 holo-glow opacity-0 group-hover:opacity-30 transition-opacity duration-300"></div>
             </a>
@@ -290,7 +376,7 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
           <div className="grid lg:grid-cols-2 gap-16 items-start">
             <div>
               <h2 className="text-4xl font-black mb-8 uppercase tracking-tighter relative">
-                LET'S WORK <span className="holo-text-together">TOGETHER</span>
+                {sections?.contact?.title?.first} <span className="holo-text-together">{sections?.contact?.title?.second}</span>
                 <div className="absolute -bottom-2 left-0 w-24 h-1 holo-gradient-together"></div>
               </h2>
               <p className="text-lg leading-relaxed mb-8">
@@ -311,7 +397,7 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
             <div className="space-y-8">
               <div>
                 <h3 className="text-xl font-black mb-4 uppercase tracking-tighter relative">
-                  SOCIAL <span className="holo-text-links">LINKS</span>
+                  {sections?.socialLinks?.title?.first} <span className="holo-text-links">{sections?.socialLinks?.title?.second}</span>
                   <div className="absolute -bottom-1 left-0 w-16 h-0.5 holo-gradient-links"></div>
                 </h3>
                 <div className="space-y-2">
@@ -347,7 +433,7 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
 
               <div>
                 <h3 className="text-xl font-black mb-4 uppercase tracking-tighter relative">
-                  CURRENT <span className="holo-text-status">STATUS</span>
+                  {sections?.currentStatus?.title?.first} <span className="holo-text-status">{sections?.currentStatus?.title?.second}</span>
                   <div className="absolute -bottom-1 left-0 w-16 h-0.5 holo-gradient-status"></div>
                 </h3>
                 <div className="text-sm font-bold uppercase tracking-wider relative flex items-center pl-6">
