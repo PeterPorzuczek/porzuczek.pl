@@ -119,10 +119,10 @@
     }
   ],
   "navigation": [
-    { "name": "WORK", "href": "#work" },
     { "name": "BLOG", "href": "#blog" },
-    { "name": "PROJECTS", "href": "#projects" },
+    { "name": "WORK", "href": "#work" },
     { "name": "ARTICLES", "href": "#articles" },
+    { "name": "PROJECTS", "href": "#projects" },
     { "name": "CONTACT", "href": "#contact" }
   ],
   "contactInfo": {
