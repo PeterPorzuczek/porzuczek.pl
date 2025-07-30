@@ -125,6 +125,91 @@
     { "name": "PROJECTS", "href": "#projects" },
     { "name": "CONTACT", "href": "#contact" }
   ],
+  "sections": {
+    "hero": {
+      "title": {
+        "first": "GLAD YOU'RE",
+        "second": "HERE"
+      }
+    },
+    "photos": {
+      "title": {
+        "first": "MY",
+        "second": "LIFE"
+      }
+    },
+    "blog": {
+      "enabled": true,
+      "title": {
+        "first": "BLOG",
+        "second": "POSTS"
+      },
+      "subtitle": "Exploring code, learning, and playful invention—one post at a time",
+      "markdownsPeek": {
+        "containerId": "blog-viewer",
+        "owner": "peterporzuczek",
+        "repo": "echo",
+        "path": "",
+        "branch": "",
+        "theme": "dark",
+        "token": "",
+        "className": "min-h-[600px]"
+      },
+      "githubLink": "echo",
+      "githubButtonText": "VIEW ALL BLOG POSTS ON GITHUB"
+    },
+    "work": {
+      "title": {
+        "first": "WORK",
+        "second": "EXPERIENCE"
+      }
+    },
+    "articles": {
+      "enabled": true,
+      "title": {
+        "first": "SELECTED",
+        "second": "ARTICLES"
+      },
+      "subtitle": "Exploring technology, education, and creative development through markdown articles",
+      "markdownsPeek": {
+        "containerId": "articles-viewer",
+        "owner": "peterporzuczek",
+        "repo": "articles",
+        "path": "articles-md",
+        "branch": "",
+        "theme": "light",
+        "token": "",
+        "className": "min-h-[600px]"
+      },
+      "githubLink": "articles",
+      "githubButtonText": "VIEW ALL ARTICLES ON GITHUB"
+    },
+    "projects": {
+      "title": {
+        "first": "SELECTED",
+        "second": "PROJECTS"
+      },
+      "githubButtonText": "VIEW ALL PROJECTS ON GITHUB"
+    },
+    "contact": {
+      "title": {
+        "first": "LET'S WORK",
+        "second": "TOGETHER"
+      }
+    },
+    "socialLinks": {
+      "title": {
+        "first": "SOCIAL",
+        "second": "LINKS"
+      }
+    },
+    "currentStatus": {
+      "title": {
+        "first": "CURRENT",
+        "second": "STATUS"
+      }
+    }
+  },
   "contactInfo": {
     "title": "LET'S WORK TOGETHER",
     "description": "READY TO COLLABORATE ON INNOVATIVE PROJECTS THAT BRIDGE TECHNOLOGY, ART, AND EDUCATION? LET'S CONNECT AND CREATE SOMETHING AMAZING.",
