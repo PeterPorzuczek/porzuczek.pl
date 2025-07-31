@@ -98,6 +98,22 @@
       "url": "https://github.com/PeterPorzuczek/chatgpt-panel-chrome-extension",
       "year": "2023",
       "accent": "holo-pink"
+    },
+    {
+      "name": "MARKDOWNS-PEEK",
+      "description": "NPM PACKAGE FOR EMBEDDING GITHUB MARKDOWNS (USED IN THIS PORTFOLIO)",
+      "tech": "JAVASCRIPT / NPM / GITHUB API",
+      "url": "https://www.npmjs.com/package/markdowns-peek",
+      "year": "2025",
+      "accent": "holo-blue"
+    },
+    {
+      "name": "PORZUCZEK.PL",
+      "description": "PERSONAL WEBSITE",
+      "tech": "REACT",
+      "url": "https://github.com/PeterPorzuczek/porzuczek.pl",
+      "year": "2024",
+      "accent": "holo-green"
     }
   ],
   "workExperience": [
