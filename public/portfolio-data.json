@@ -200,7 +200,7 @@
         "owner": "peterporzuczek",
         "repo": "articles",
         "path": "articles-md",
-        "branch": "",
+        "branch": "main",
         "theme": "light",
         "token": "",
         "className": "min-h-[600px]"
