@@ -26,7 +26,7 @@ export default function MarkdownsPeekViewer({
   owner,
   repo,
   path = '',
-  branch = '',
+  branch = 'main',
   theme = 'light',
   token = '',
   disableStyles = false,
@@ -44,17 +44,13 @@ export default function MarkdownsPeekViewer({
       containerId,
       owner,
       repo,
+      path,
+      branch,
       theme,
       token,
       disableStyles
     })
 
-    // Set the repository with path and branch if provided
-    if (path || branch) {
-      viewerRef.current.setRepository(owner, repo, { path, branch })
-    }
-
-    // Cleanup function
     return () => {
       if (viewerRef.current && typeof viewerRef.current.destroy === 'function') {
         viewerRef.current.destroy()
@@ -62,7 +58,6 @@ export default function MarkdownsPeekViewer({
     }
   }, [isLoaded, containerId, owner, repo, path, branch, theme, token, disableStyles])
 
-  // Update repository when props change
   useEffect(() => {
     if (isLoaded && viewerRef.current && typeof viewerRef.current.setRepository === 'function') {
       viewerRef.current.setRepository(owner, repo, { path, branch })
