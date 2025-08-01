@@ -98,7 +98,7 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
       </div>
 
       {/* Header */}
-      <header className="holo-header p-8 border-b-2 border-black relative z-10">
+      <header id="header" className="holo-header p-8 border-b-2 border-black relative z-10">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <a href="/" className="text-2xl font-black tracking-tight relative hover:opacity-80 transition-opacity">
             {personalInfo.title}
@@ -116,7 +116,7 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
       </header>
 
       {/* Hero */}
-      <section className="holo-hero p-8 relative z-10">
+      <section id="hero" className="holo-hero p-8 relative z-10">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-16 items-start">
             <div className="space-y-8">

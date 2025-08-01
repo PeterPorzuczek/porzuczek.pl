@@ -143,6 +143,7 @@
     }
   ],
   "navigation": [
+    { "name": "ME", "href": "#hero" },
     { "name": "BLOG", "href": "#blog" },
     { "name": "WORK", "href": "#work" },
     { "name": "ARTICLES", "href": "#articles" },
