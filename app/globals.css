@@ -506,3 +506,7 @@ html {
   border-color: #000000 !important;
   text-align: justify;
 }
+
+#blog-viewer .dark * {
+  border-color: #fff !important;
+}
