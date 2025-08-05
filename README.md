@@ -2,7 +2,7 @@
 
 Modern, responsive portfolio website built with Next.js and TypeScript, featuring custom typography, gradient designs, and optimized performance.
 
-![Portfolio Screenshot](https://i.imgur.com/LmEO1x5.png)
+![Portfolio Screenshot](https://i.imgur.com/6BTF8QV.png)
 
 ## 🚀 Live Demo
 

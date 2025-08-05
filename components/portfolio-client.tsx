@@ -1,13 +1,17 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Github, Linkedin, Instagram, ExternalLink, ArrowUpRight, ChevronUp } from "lucide-react"
+import { Github, Linkedin, Instagram, ExternalLink, ArrowUpRight, ChevronUp, Menu, X } from "lucide-react"
 import MarkdownsPeekViewer from './markdowns-peek-viewer'
 
 export default function PortfolioClient({ data: initialData }: { data: any }) {
   const [data, setData] = useState(initialData);
   const [showScrollTop, setShowScrollTop] = useState(false)
   const [fontsLoaded, setFontsLoaded] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [displayedPhotos, setDisplayedPhotos] = useState<any[]>([])
+  const [photoTransition, setPhotoTransition] = useState(true)
+  const [shuffledProjects, setShuffledProjects] = useState<any[]>([])
 
   // Fetch fresh data from GitHub after component mounts
   useEffect(() => {
@@ -69,6 +73,54 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
     checkFonts()
   }, [])
 
+  // Initialize and rotate photos
+  useEffect(() => {
+    if (!photos || photos.length === 0) return;
+    
+    // Initialize with first 4 photos
+    if (displayedPhotos.length === 0) {
+      setDisplayedPhotos(photos.slice(0, 4));
+      return;
+    }
+    
+    // Rotate photos every 5 seconds
+    const interval = setInterval(() => {
+      setPhotoTransition(false);
+      
+      setTimeout(() => {
+        setDisplayedPhotos(prevPhotos => {
+          const allPhotos = [...photos];
+          const newPhotos = [];
+          
+          // Get 4 random photos that are different from current ones
+          while (newPhotos.length < 4 && allPhotos.length > 0) {
+            const randomIndex = Math.floor(Math.random() * allPhotos.length);
+            newPhotos.push(allPhotos.splice(randomIndex, 1)[0]);
+          }
+          
+          return newPhotos;
+        });
+        setPhotoTransition(true);
+      }, 300);
+    }, 5000);
+    
+    return () => clearInterval(interval);
+  }, [photos, displayedPhotos.length])
+
+  // Shuffle projects only once on mount
+  useEffect(() => {
+    if (!projects || projects.length === 0) return;
+    
+    // Shuffle projects array using Fisher-Yates algorithm
+    const shuffled = [...projects];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    
+    setShuffledProjects(shuffled);
+  }, [projects])
+
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -78,63 +130,91 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
 
   if (!fontsLoaded) {
     return (
-      <div className="min-h-screen bg-white flex items-center justify-center">
+      <div className="min-h-screen bg-[#F3F3F7] flex items-center justify-center">
         <div className="text-center">
-          <div className="text-2xl font-bold uppercase tracking-wider mb-4">{loadingScreen.title}</div>
-          <div className="w-24 h-0.5 bg-black mx-auto mb-2"></div>
-          <div className="text-sm font-bold uppercase tracking-wider opacity-60">{loadingScreen.text}</div>
+          <div className="text-2xl font-bold mb-4">{loadingScreen.title}</div>
+          <div className="w-24 h-0.5 bg-gray-300 mx-auto mb-2"></div>
+          <div className="text-sm font-medium text-gray-600">{loadingScreen.text}</div>
         </div>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-white text-black relative">
-      {/* Subtle holographic background elements */}
-      <div className="fixed inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-20 right-20 w-32 h-32 holo-orb opacity-30"></div>
-        <div className="absolute bottom-40 left-10 w-24 h-24 holo-orb-2 opacity-20"></div>
-        <div className="absolute top-1/2 left-1/3 w-16 h-16 holo-orb-3 opacity-25"></div>
-      </div>
+    <div className="min-h-screen bg-[#F3F3F7] text-[#1C1B22] relative">
+
 
       {/* Header */}
-      <header id="header" className="holo-header p-8 border-b-2 border-black relative z-10">
+      <header id="header" className="holo-header p-4 md:p-8 border-b-2 border-[#1C1B22] relative z-10">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <a href="/" className="text-2xl font-black tracking-tight relative hover:opacity-80 transition-opacity">
+          <a href="/" className="text-xl md:text-2xl font-black tracking-tight relative hover:opacity-80 transition-opacity">
             {personalInfo.title}
             <div className="absolute -bottom-1 left-0 w-full h-0.5 holo-gradient"></div>
           </a>
-          <nav className="hidden md:flex gap-8 text-sm font-bold uppercase tracking-wider">
+          <nav className="hidden md:flex gap-8 text-sm font-medium">
             {navigation.map((item) => (
-              <a key={item.name} href={item.href} className="hover:underline relative group">
+              <a key={item.name} href={item.href} className="relative group text-gray-700 hover:text-[#1C1B22] transition-colors duration-200">
                 {item.name}
-                <div className="absolute -bottom-1 left-0 w-0 h-0.5 holo-gradient group-hover:w-full transition-all duration-300"></div>
+                <div className="absolute -bottom-1 left-0 w-full h-px bg-gray-300 group-hover:bg-[#1C1B22] transition-all duration-200"></div>
+              </a>
+            ))}
+          </nav>
+          <button 
+            className="md:hidden" 
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
+      </header>
+
+      {/* Mobile Menu */}
+      {mobileMenuOpen && (
+        <div className="fixed inset-0 bg-[#F3F3F7] z-50 md:hidden">
+          <div className="flex justify-between items-center p-4 border-b-2 border-[#1C1B22]">
+            <a href="/" className="text-xl font-black tracking-tight">
+              {personalInfo.title}
+            </a>
+            <button onClick={() => setMobileMenuOpen(false)} aria-label="Close menu">
+              <X size={24} />
+            </button>
+          </div>
+          <nav className="flex flex-col p-4 space-y-4">
+            {navigation.map((item) => (
+              <a 
+                key={item.name} 
+                href={item.href} 
+                className="text-lg font-medium py-2 border-b border-gray-200"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {item.name}
               </a>
             ))}
           </nav>
         </div>
-      </header>
+      )}
 
       {/* Hero */}
-      <section id="hero" className="holo-hero p-8 relative z-10">
+      <section id="hero" className="holo-hero px-4 py-12 md:px-8 md:py-36 relative z-10">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-16 items-start">
             <div className="space-y-8">
               <div>
-                <h1 className="text-6xl md:text-8xl font-black leading-none mb-4 tracking-tighter relative">
+                <h1 className="text-4xl sm:text-6xl md:text-8xl font-black leading-none mb-6 tracking-tighter relative">
                   {sections?.hero?.title?.first}
                   <br />
                   <span className="holo-text">{sections?.hero?.title?.second}</span>
                 </h1>
               </div>
 
-              <div className="space-y-4 text-lg leading-relaxed max-w-lg">
+              <div className="space-y-4 text-base md:text-lg leading-relaxed max-w-lg">
                 {personalInfo.bio.map((paragraph, index) => (
                   <p key={index}>{paragraph}</p>
                 ))}
               </div>
 
-              <div className="text-xl font-bold uppercase tracking-wider space-y-1">
+              <div className="text-lg font-semibold space-y-2">
                 {personalInfo.roles.map((role, index) => (
                   <div key={index} className="relative pl-6 flex items-center">
                     {role}
@@ -161,33 +241,36 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
 
             {/* Photo Grid */}
             <div className="space-y-6">
-              <div className="text-center">
-                <h3 className="text-2xl font-black uppercase tracking-wider relative">
+              <div className="mb-6 flex justify-between items-end">
+                <h3 className="text-2xl font-bold tracking-tight relative">
                   {sections?.photos?.title?.first} <span className="holo-text-life">{sections?.photos?.title?.second}</span>
-                  <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-16 h-0.5 holo-gradient-life"></div>
+                  <div className="absolute -bottom-2 left-0 w-16 h-1 holo-gradient-life"></div>
                 </h3>
               </div>
               
               <div className="grid grid-cols-2 gap-4">
-                {photos.sort(() => Math.random() - 0.5).slice(0, 4).map((photo, index) => (
+                {[0, 1, 2, 3].map((index) => (
                   <a
                     key={index}
                     href={socialLinks.instagram.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`relative cursor-pointer group block ${index === 1 ? "mt-8" : ""} ${index === 2 ? "-mt-8" : ""}`}
+                    className={`relative cursor-pointer group block transition-transform duration-300 hover:-translate-y-1 ${index === 1 ? "mt-8" : ""} ${index === 2 ? "-mt-8" : ""}`}
                   >
-                    <img
-                      src={photo.url}
-                      alt={photo.caption}
-                      className="w-full h-64 object-cover border-2 border-black transition-all duration-300"
-                    />
-                    <div className="absolute inset-0 holo-overlay opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
-                    
-                    {/* Photo caption */}
-                    <div className="absolute top-2 left-2 bg-black text-white px-2 py-1 text-xs font-bold relative">
-                      {photo.caption}
-                      <div className="absolute -bottom-0.5 left-0 w-full h-0.5 holo-gradient"></div>
+                    <div className="relative overflow-hidden rounded-lg border border-gray-200 group-hover:border-[#667eea] group-hover:shadow-lg transition-all duration-300">
+                      <div className="relative w-full h-64 overflow-hidden">
+                        <img
+                          src={displayedPhotos[index]?.url}
+                          alt={displayedPhotos[index]?.caption}
+                          className={`w-full h-full object-cover transition-opacity duration-500 ${photoTransition ? "opacity-100" : "opacity-0"}`}
+                        />
+                      </div>
+                      <div className="absolute inset-0 holo-overlay opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+                      
+                      {/* Photo caption - minimal style */}
+                      <div className={`absolute bottom-2 left-2 bg-[#F3F3F7]/90 backdrop-blur-sm text-[#1C1B22] px-2 py-1 text-[10px] font-medium rounded transition-opacity duration-500 ${photoTransition ? "opacity-100" : "opacity-0"}`}>
+                        {displayedPhotos[index]?.caption}
+                      </div>
                     </div>
                   </a>
                 ))}
@@ -199,14 +282,14 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
 
       {/* Blog */}
       {sections?.blog?.enabled && sections.blog.markdownsPeek?.repo && (
-        <section id="blog" className="p-8 border-t-2 border-black relative z-10">
+        <section id="blog" className="px-4 py-12 md:px-8 md:py-24 border-t-2 border-[#1C1B22] relative z-10">
           <div className="max-w-7xl mx-auto">
-            <h2 className="text-4xl font-black mb-12 uppercase tracking-tighter relative">
+            <h2 className="text-3xl md:text-4xl font-black mb-12 tracking-tight relative">
               {sections?.blog?.title?.first} <span className="holo-text-blog">{sections?.blog?.title?.second}</span>
               <div className="absolute -bottom-2 left-0 w-24 h-1 holo-gradient-blog"></div>
             </h2>
 
-            <div className="bg-white overflow-hidden">
+            <div className="bg-[#F3F3F7] overflow-hidden border border-gray-200 rounded-lg p-6 md:p-8">
               <MarkdownsPeekViewer
                 containerId={sections.blog.markdownsPeek.containerId}
                 owner={sections.blog.markdownsPeek.owner}
@@ -218,7 +301,7 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
                 className={sections.blog.markdownsPeek.className}
               />
               <div className="relative w-100 h-1 holo-gradient-blog"></div>
-            </div>
+              </div>
 
             <div className="mt-8 text-center">
               <p className="text-sm text-gray-600 mb-4">
@@ -240,9 +323,9 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
       )}
 
       {/* Work Experience */}
-      <section id="work" className="p-8 border-t-2 border-black relative z-10">
+      <section id="work" className="px-4 py-12 md:px-8 md:py-24 border-t-2 border-[#1C1B22] relative z-10">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-black mb-12 uppercase tracking-tighter relative">
+                      <h2 className="text-3xl md:text-4xl font-black mb-12 tracking-tight relative">
             {sections?.work?.title?.first} <span className="holo-text-experience">{sections?.work?.title?.second}</span>
             <div className="absolute -bottom-2 left-0 w-24 h-1 holo-gradient-experience"></div>
           </h2>
@@ -254,22 +337,22 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
                 href={socialLinks.linkedin.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="grid md:grid-cols-4 gap-4 border-b border-gray-300 pb-8 relative group cursor-pointer hover:bg-gray-50 transition-colors duration-300 block"
+                className="work-block grid md:grid-cols-4 gap-4 md:gap-6 border border-gray-200 mb-4 relative group cursor-pointer hover:bg-gray-50 hover:border-[#667eea] hover:shadow-lg transition-all duration-300 block p-6 md:p-8 rounded-lg"
               >
-                <div className="text-sm font-bold uppercase tracking-wider">{job.period}</div>
+                <div className="text-sm font-medium text-gray-500">{job.period}</div>
                 <div className="md:col-span-2">
-                  <h3 className="text-xl font-black mb-2 relative font-karrik flex items-center pl-6">
+                  <h3 className="text-xl font-bold mb-2 relative font-karrik flex items-center pl-6">
                     {job.position}
                     <div className={`absolute left-0 w-2 h-2 ${job.accent} group-hover:scale-150 transition-transform duration-300`}></div>
                   </h3>
-                  <div className="text-sm font-bold uppercase tracking-wider mb-4 holo-text-subtle font-karrik">
+                  <div className="text-base font-semibold mb-4 text-gray-700">
                     {job.company}
                   </div>
-                  <p className="text-sm leading-relaxed">
+                  <p className="text-base leading-relaxed text-gray-600">
                     {job.description}
                   </p>
                 </div>
-                <div className="text-sm font-bold uppercase tracking-wider">{job.technologies}</div>
+                <div className="text-sm font-medium text-gray-500">{job.technologies}</div>
               </a>
             ))}
           </div>
@@ -278,14 +361,14 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
 
       {/* Articles */}
       {sections?.articles?.enabled && sections.articles.markdownsPeek?.repo && (
-        <section id="articles" className="p-8 border-t-2 border-black relative z-10">
+        <section id="articles" className="px-8 py-16 md:py-24 border-t-2 border-[#1C1B22] relative z-10">
           <div className="max-w-7xl mx-auto">
-            <h2 className="text-4xl font-black mb-12 uppercase tracking-tighter relative">
+            <h2 className="text-3xl md:text-4xl font-black mb-12 tracking-tight relative">
               {sections?.articles?.title?.first} <span className="holo-text-articles">{sections?.articles?.title?.second}</span>
               <div className="absolute -bottom-2 left-0 w-24 h-1 holo-gradient-articles"></div>
             </h2>
 
-            <div className="bg-white overflow-hidden">
+            <div className="bg-[#F3F3F7] overflow-hidden border border-gray-200 rounded-lg p-6 md:p-8">
               <MarkdownsPeekViewer
                 containerId={sections.articles.markdownsPeek.containerId}
                 owner={sections.articles.markdownsPeek.owner}
@@ -319,34 +402,34 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
       )}
 
       {/* Projects */}
-      <section id="projects" className="p-8 border-t-2 border-black relative z-10">
+      <section id="projects" className="px-8 py-16 md:py-24 border-t-2 border-[#1C1B22] relative z-10">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-black mb-12 uppercase tracking-tighter relative">
+                      <h2 className="text-3xl md:text-4xl font-black mb-12 tracking-tight relative">
             {sections?.projects?.title?.first} <span className="holo-text-projects">{sections?.projects?.title?.second}</span>
             <div className="absolute -bottom-2 left-0 w-24 h-1 holo-gradient-projects"></div>
           </h2>
 
           <div className="grid md:grid-cols-2 gap-8">
-            {projects.sort(() => Math.random() - 0.5).map((project, index) => (
+            {shuffledProjects.map((project, index) => (
               <a
                 key={index}
                 href={project.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`block border-2 border-black p-6 hover:bg-black hover:text-white group relative overflow-hidden ${project.accent} cursor-pointer`}
+                className={`block border border-[#1C1B22] p-6 md:p-8 hover:border-[#667eea] hover:shadow-xl group relative overflow-hidden transition-all duration-300 rounded-lg bg-[#1C1B22] text-[#F3F3F7]`}
               >
                 <div className="absolute inset-0 holo-project-bg opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
                 <div className="relative z-10">
                   <div className="flex justify-between items-start mb-4">
-                    <div className="text-sm font-bold uppercase tracking-wider">{project.year}</div>
-                    <div className="group-hover:text-white relative">
+                    <div className="text-sm font-medium text-[#F3F3F7] opacity-60">{project.year}</div>
+                    <div className="text-[#F3F3F7] opacity-80 group-hover:opacity-100 relative">
                       <ArrowUpRight size={20} />
                       <div className="absolute -inset-1 holo-glow opacity-0 group-hover:opacity-50 transition-opacity duration-300"></div>
                     </div>
                   </div>
-                  <h3 className="text-xl font-black mb-2 uppercase tracking-tighter font-karrik">{project.name}</h3>
-                  <p className="text-sm mb-4 leading-relaxed">{project.description}</p>
-                  <div className="text-xs font-bold uppercase tracking-wider relative">
+                  <h3 className="text-xl font-bold mb-2 font-karrik text-[#F3F3F7]">{project.name}</h3>
+                  <p className="text-sm mb-4 leading-relaxed text-[#F3F3F7] opacity-90">{project.description}</p>
+                  <div className="text-sm font-medium text-[#F3F3F7] opacity-70 relative">
                     {project.tech}
                     <div className="absolute -bottom-1 left-0 w-0 h-0.5 holo-gradient group-hover:w-full transition-all duration-500"></div>
                   </div>
@@ -371,7 +454,7 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
       </section>
 
       {/* Contact */}
-      <section id="contact" className="p-8 border-t-2 border-black relative z-10">
+      <section id="contact" className="px-8 py-16 md:py-24 border-t-2 border-[#1C1B22] relative z-10">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-16 items-start">
             <div>
@@ -383,11 +466,11 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
                 {contactInfo.description}
               </p>
               <div className="space-y-4">
-                <a href={`mailto:${personalInfo.email}`} className="block text-sm font-bold uppercase tracking-wider relative group hover:underline flex items-center pl-6">
+                <a href={`mailto:${personalInfo.email}`} className="block text-base font-medium relative group hover:underline flex items-center pl-6">
                   {personalInfo.email}
                   <div className="absolute left-0 w-2 h-2 holo-dot group-hover:scale-150 transition-transform duration-300"></div>
                 </a>
-                <div className="text-sm font-bold uppercase tracking-wider relative group flex items-center pl-6">
+                <div className="text-base font-medium text-gray-700 relative group flex items-center pl-6">
                   {personalInfo.location}
                   <div className="absolute left-0 w-2 h-2 holo-dot-2 group-hover:scale-150 transition-transform duration-300"></div>
                 </div>
@@ -396,7 +479,7 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
 
             <div className="space-y-8">
               <div>
-                <h3 className="text-xl font-black mb-4 uppercase tracking-tighter relative">
+                <h3 className="text-xl font-bold mb-4 relative">
                   {sections?.socialLinks?.title?.first} <span className="holo-text-links">{sections?.socialLinks?.title?.second}</span>
                   <div className="absolute -bottom-1 left-0 w-16 h-0.5 holo-gradient-links"></div>
                 </h3>
@@ -432,7 +515,7 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
               </div>
 
               <div>
-                <h3 className="text-xl font-black mb-4 uppercase tracking-tighter relative">
+                <h3 className="text-xl font-bold mb-4 relative">
                   {sections?.currentStatus?.title?.first} <span className="holo-text-status">{sections?.currentStatus?.title?.second}</span>
                   <div className="absolute -bottom-1 left-0 w-16 h-0.5 holo-gradient-status"></div>
                 </h3>
@@ -447,10 +530,10 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
       </section>
 
       {/* Footer */}
-      <footer className="p-8 border-t-2 border-black relative z-10">
+      <footer className="px-8 py-16 md:py-20 border-t-2 border-[#1C1B22] relative z-10">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <div className="text-sm font-bold uppercase tracking-wider">{contactInfo.footer.copyright}</div>
-          <div className="text-sm font-bold uppercase tracking-wider holo-text-subtle">TO INFINITY AND <span className="holo-text-beyond">BEYOND</span></div>
+          <div className="text-sm font-medium text-gray-600">{contactInfo.footer.copyright}</div>
+          <div className="text-sm font-medium text-gray-500">TO INFINITY AND <span className="font-bold text-[#1C1B22]">BEYOND</span></div>
         </div>
       </footer>
 
@@ -458,7 +541,7 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
       {showScrollTop && (
         <button
           onClick={scrollToTop}
-          className="fixed bottom-8 right-8 w-12 h-12 bg-black text-white border-2 border-black hover:bg-white hover:text-black transition-all duration-300 z-50 flex items-center justify-center group"
+          className="fixed bottom-8 right-8 w-12 h-12 bg-[#1C1B22] text-[#F3F3F7] border-2 border-[#1C1B22] hover:bg-[#F3F3F7] hover:text-[#1C1B22] transition-all duration-300 z-50 flex items-center justify-center group"
           aria-label="Scroll to top"
         >
           <ChevronUp size={20} className="group-hover:scale-110 transition-transform duration-300" />

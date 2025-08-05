@@ -37,25 +37,25 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --background: 240 33% 97%;
+    --foreground: 248 11% 11%;
+    --card: 240 33% 97%;
+    --card-foreground: 248 11% 11%;
+    --popover: 240 33% 97%;
+    --popover-foreground: 248 11% 11%;
+    --primary: 248 11% 11%;
+    --primary-foreground: 240 33% 97%;
     --secondary: 210 40% 96%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary-foreground: 248 11% 11%;
     --muted: 210 40% 96%;
     --muted-foreground: 215.4 16.3% 46.9%;
     --accent: 210 40% 96%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent-foreground: 248 11% 11%;
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 240 33% 97%;
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --ring: 248 11% 11%;
     --radius: 0.5rem;
   }
 }
@@ -95,7 +95,7 @@ h1, h2, h3, h4, h5, h6,
   font-family: 'Typefesse Claire-Obscure', Arial, sans-serif;
 }
 
-/* Beautiful Static Gradients */
+/* Beautiful Gradients */
 .holo-gradient {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   transition: all 0.3s ease;
@@ -111,6 +111,7 @@ h1, h2, h3, h4, h5, h6,
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  font-weight: 700;
   transition: all 0.3s ease;
 }
 
@@ -119,7 +120,7 @@ h1, h2, h3, h4, h5, h6,
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  filter: drop-shadow(0 2px 4px rgba(102, 126, 234, 0.3));
+  filter: drop-shadow(0 2px 4px rgba(102, 126, 234, 0.2));
 }
 
 .holo-text-subtle {
@@ -137,45 +138,30 @@ h1, h2, h3, h4, h5, h6,
   background-clip: text;
 }
 
-/* Different gradient colors for each header */
+/* Simplified header colors */
 .holo-text-life {
-  background: linear-gradient(135deg, #10b981 0%, #34d399 50%, #6ee7b7 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  transition: all 0.3s ease;
+  color: #10b981;
+  font-weight: 700;
 }
 
 .holo-text-experience {
-  background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 50%, #fcd34d 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  transition: all 0.3s ease;
+  color: #f59e0b;
+  font-weight: 700;
 }
 
 .holo-text-projects {
-  background: linear-gradient(135deg, #0ea5e9 0%, #38bdf8 50%, #7dd3fc 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  transition: all 0.3s ease;
+  color: #0ea5e9;
+  font-weight: 700;
 }
 
 .holo-text-articles {
-  background: linear-gradient(135deg, #78e90e 0%, #383bf8 50%, #fc7dd2 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  transition: all 0.3s ease;
+  color: #6366f1;
+  font-weight: 700;
 }
 
 .holo-text-blog {
-  background: linear-gradient(135deg, #e95e0e 0%, #f838d8 50%, #fafc7d 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  transition: all 0.3s ease;
+  color: #dc2626;
+  font-weight: 700;
 }
 
 .holo-text-together {
@@ -257,16 +243,13 @@ h1, h2, h3, h4, h5, h6,
 }
 
 .holo-dot {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #000;
   border-radius: 50%;
-  box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
   transition: all 0.3s ease;
 }
 
 .holo-dot:hover {
-  background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
-  box-shadow: 0 6px 12px rgba(102, 126, 234, 0.4);
-  transform: scale(1.1);
+  transform: scale(1.2);
 }
 
 .holo-dot-2 {
@@ -368,19 +351,19 @@ h1, h2, h3, h4, h5, h6,
 
 .holo-project-bg {
   background: linear-gradient(135deg, 
-    rgba(102, 126, 234, 0.05), 
-    rgba(118, 75, 162, 0.03), 
-    rgba(240, 147, 251, 0.02), 
-    rgba(79, 172, 254, 0.04));
+    rgba(102, 126, 234, 0.1), 
+    rgba(118, 75, 162, 0.08), 
+    rgba(240, 147, 251, 0.06), 
+    rgba(79, 172, 254, 0.08));
   transition: all 0.3s ease;
 }
 
 .holo-project-bg:hover {
   background: linear-gradient(135deg, 
-    rgba(102, 126, 234, 0.08), 
-    rgba(118, 75, 162, 0.06), 
-    rgba(240, 147, 251, 0.04), 
-    rgba(79, 172, 254, 0.07));
+    rgba(102, 126, 234, 0.15), 
+    rgba(118, 75, 162, 0.12), 
+    rgba(240, 147, 251, 0.1), 
+    rgba(79, 172, 254, 0.12));
 }
 
 /* Beautiful Project accent colors */
@@ -424,6 +407,14 @@ h1, h2, h3, h4, h5, h6,
   transform: translateY(-2px);
 }
 
+/* Dark project cards - special gradient border on hover */
+@keyframes gradient-border {
+  0% { border-color: #667eea; }
+  33% { border-color: #764ba2; }
+  66% { border-color: #f093fb; }
+  100% { border-color: #667eea; }
+}
+
 /* Clean animations removed - using simple transitions only */
 
 /* Minimal transitions for essential interactions */
@@ -439,8 +430,15 @@ button:hover {
 
 /* Beautiful selection */
 ::selection {
-  background: #000000;
-  color: #ffffff;
+  background: #1C1B22;
+  color: #F3F3F7;
+}
+
+/* Selection inside articles/blog */
+#articles-viewer *::selection,
+#blog-viewer *::selection {
+  background: #667eea !important;
+  color: #F3F3F7 !important;
 }
 
 /* Colorful scrollbar */
@@ -449,7 +447,7 @@ button:hover {
 }
 
 ::-webkit-scrollbar-track {
-  background: #f8fafc;
+  background: #F3F3F7;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -489,24 +487,303 @@ html {
   position: fixed;
   width: 100%;
   z-index: 999;
-  background: white;
+  background: #F3F3F7;
 }
 
 .holo-hero {
   padding-top: 150px;
 }
 
-#articles-viewer h1, #articles-viewer h2, #articles-viewer h3, #articles-viewer h4, #articles-viewer h5, #articles-viewer h6, #articles-viewer .font-headers,
-#blog-viewer h1, #blog-viewer h2, #blog-viewer h3, #blog-viewer h4, #blog-viewer h5, #blog-viewer h6, #blog-viewer .font-headers {
-  font-family: __JetBrains_Mono_380c2d !important;
+@media (max-width: 768px) {
+  .holo-hero {
+    padding-top: 100px;
+  }
+}
+
+/* Articles and Blog Viewer Styles - MINIMAL */
+#articles-viewer h1, #articles-viewer h2, #articles-viewer h3, #articles-viewer h4, #articles-viewer h5, #articles-viewer h6,
+#blog-viewer h1, #blog-viewer h2, #blog-viewer h3, #blog-viewer h4, #blog-viewer h5, #blog-viewer h6 {
+  font-family: 'Karrik', Arial, sans-serif !important;
+  margin-bottom: 0.75rem;
+  color: #1C1B22 !important;
+}
+
+/* Basic spacing between articles */
+#articles-viewer .markdowns-peek-item,
+#blog-viewer .markdowns-peek-item {
+  margin-bottom: 2.5rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgba(28, 27, 34, 0.1);
+  transition: all 0.2s ease;
+}
+
+#articles-viewer .markdowns-peek-item:hover,
+#blog-viewer .markdowns-peek-item:hover {
+  background-color: rgba(28, 27, 34, 0.02);
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin-left: -1rem;
+  margin-right: -1rem;
+  border-radius: 0.5rem;
+}
+
+/* Background and text colors */
+#articles-viewer,
+#blog-viewer {
+  background-color: #F3F3F7 !important;
+  color: #1C1B22 !important;
 }
 
 #articles-viewer *,
 #blog-viewer * {
-  border-color: #000000 !important;
-  text-align: justify;
+  color: #1C1B22 !important;
 }
 
-#blog-viewer .dark * {
-  border-color: #fff !important;
+#articles-viewer .markdowns-peek-item:last-child,
+#blog-viewer .markdowns-peek-item:last-child {
+  border-bottom: none;
 }
+
+/* Make titles bigger */
+#articles-viewer .markdowns-peek-item h2:first-child,
+#articles-viewer .markdowns-peek-item h3:first-child,
+#blog-viewer .markdowns-peek-item h2:first-child,
+#blog-viewer .markdowns-peek-item h3:first-child,
+#articles-viewer .markdowns-peek-item > a:first-child,
+#blog-viewer .markdowns-peek-item > a:first-child {
+  font-size: 1.5rem !important;
+  font-weight: 700 !important;
+  margin-bottom: 0.5rem !important;
+  color: #1C1B22 !important;
+  text-decoration: none !important;
+  display: block !important;
+}
+
+#articles-viewer .markdowns-peek-item > a:first-child:hover,
+#blog-viewer .markdowns-peek-item > a:first-child:hover {
+  color: #667eea !important;
+  text-decoration: underline !important;
+}
+
+/* Style dates */
+#articles-viewer .markdowns-peek-date,
+#blog-viewer .markdowns-peek-date,
+#articles-viewer .markdowns-peek-item time,
+#blog-viewer .markdowns-peek-item time,
+#articles-viewer time,
+#blog-viewer time {
+  font-size: 0.875rem !important;
+  color: rgba(28, 27, 34, 0.6) !important;
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+/* Basic text styling */
+#articles-viewer p,
+#blog-viewer p {
+  line-height: 1.75;
+  margin-bottom: 1rem;
+  color: #1C1B22 !important;
+}
+
+/* Links styling */
+#articles-viewer a,
+#blog-viewer a {
+  color: #667eea !important;
+  text-decoration: underline !important;
+}
+
+#articles-viewer a:hover,
+#blog-viewer a:hover {
+  color: #5a67d8 !important;
+}
+
+/* Code blocks */
+#articles-viewer pre,
+#blog-viewer pre,
+#articles-viewer code,
+#blog-viewer code {
+  background-color: rgba(28, 27, 34, 0.05) !important;
+  color: #1C1B22 !important;
+  border-color: rgba(28, 27, 34, 0.1) !important;
+}
+
+/* Blockquotes */
+#articles-viewer blockquote,
+#blog-viewer blockquote {
+  border-left-color: #667eea !important;
+  color: rgba(28, 27, 34, 0.8) !important;
+  background-color: rgba(102, 126, 234, 0.05) !important;
+}
+
+/* Lists */
+#articles-viewer ul li,
+#articles-viewer ol li,
+#blog-viewer ul li,
+#blog-viewer ol li {
+  color: #1C1B22 !important;
+}
+
+/* Metadata and small text */
+#articles-viewer small,
+#blog-viewer small,
+#articles-viewer .text-sm,
+#blog-viewer .text-sm {
+  color: rgba(28, 27, 34, 0.7) !important;
+}
+
+/* Tables */
+#articles-viewer table,
+#blog-viewer table {
+  border-color: rgba(28, 27, 34, 0.1) !important;
+}
+
+#articles-viewer th,
+#blog-viewer th {
+  background-color: rgba(28, 27, 34, 0.05) !important;
+  color: #1C1B22 !important;
+  border-color: rgba(28, 27, 34, 0.1) !important;
+}
+
+#articles-viewer td,
+#blog-viewer td {
+  border-color: rgba(28, 27, 34, 0.1) !important;
+  color: #1C1B22 !important;
+}
+
+/* Horizontal rules */
+#articles-viewer hr,
+#blog-viewer hr {
+  border-color: rgba(28, 27, 34, 0.1) !important;
+}
+
+/* Images */
+#articles-viewer img,
+#blog-viewer img {
+  border-color: rgba(28, 27, 34, 0.1) !important;
+}
+
+/* Strong and em text */
+#articles-viewer strong,
+#articles-viewer b,
+#blog-viewer strong,
+#blog-viewer b {
+  color: #1C1B22 !important;
+  font-weight: 700 !important;
+}
+
+#articles-viewer em,
+#articles-viewer i,
+#blog-viewer em,
+#blog-viewer i {
+  color: #1C1B22 !important;
+}
+
+/* Dark mode adjustments for blog */
+#blog-viewer.dark,
+#blog-viewer .dark main,
+#blog-viewer .dark aside,
+#blog-viewer .dark,
+#articles-viewer.dark,
+#articles-viewer .dark main,
+#articles-viewer .dark aside,
+#articles-viewer .dark {
+  background-color: #1C1B22 !important;
+}
+
+#blog-viewer.light,
+#blog-viewer .light main,
+#blog-viewer .light aside,
+#blog-viewer .light,
+#articles-viewer.light,
+#articles-viewer .light main,
+#articles-viewer .light aside,
+#articles-viewer .light {
+  background-color: rgba(255, 255, 255, 0.64);
+  background-color: #F3F3F7 !important;
+}
+
+.work-block {
+  background-color: rgba(255, 255, 255, 0.64);
+  background-color: #F3F3F7;
+}
+
+#blog-viewer.dark *,
+#blog-viewer .dark * {
+  color: #F3F3F7 !important;
+}
+
+#blog-viewer.dark h1,
+#blog-viewer.dark h2,
+#blog-viewer.dark h3,
+#blog-viewer.dark h4,
+#blog-viewer.dark h5,
+#blog-viewer.dark h6,
+#blog-viewer .dark h1,
+#blog-viewer .dark h2,
+#blog-viewer .dark h3,
+#blog-viewer .dark h4,
+#blog-viewer .dark h5,
+#blog-viewer .dark h6 {
+  color: #F3F3F7 !important;
+}
+
+#blog-viewer.dark time,
+#blog-viewer .dark time,
+#blog-viewer.dark .markdowns-peek-date,
+#blog-viewer .dark .markdowns-peek-date {
+  color: rgba(243, 243, 247, 0.6) !important;
+}
+
+#blog-viewer.dark a,
+#blog-viewer .dark a {
+  color: #764ba2 !important;
+}
+
+#blog-viewer.dark a:hover,
+#blog-viewer .dark a:hover {
+  color: #667eea !important;
+}
+
+#blog-viewer.dark code,
+#blog-viewer .dark code,
+#blog-viewer.dark pre,
+#blog-viewer .dark pre {
+  background-color: rgba(243, 243, 247, 0.05) !important;
+  color: #F3F3F7 !important;
+  border-color: rgba(243, 243, 247, 0.1) !important;
+}
+
+#blog-viewer.dark blockquote,
+#blog-viewer .dark blockquote {
+  border-left-color: #764ba2 !important;
+  color: rgba(243, 243, 247, 0.8) !important;
+  background-color: rgba(118, 75, 162, 0.05) !important;
+}
+
+#blog-viewer.dark hr,
+#blog-viewer .dark hr {
+  border-color: rgba(243, 243, 247, 0.1) !important;
+}
+
+#blog-viewer.dark table,
+#blog-viewer .dark table,
+#blog-viewer.dark th,
+#blog-viewer .dark th,
+#blog-viewer.dark td,
+#blog-viewer .dark td {
+  border-color: rgba(243, 243, 247, 0.1) !important;
+}
+
+#blog-viewer.dark th,
+#blog-viewer .dark th {
+  background-color: rgba(243, 243, 247, 0.05) !important;
+}
+
+@media (max-width: 768px) {
+  #articles-viewer aside,
+  #blog-viewer aside {
+    box-shadow: none !important;
+  }
+}
+
