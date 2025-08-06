@@ -145,7 +145,7 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
 
 
       {/* Header */}
-      <header id="header" className="holo-header p-4 md:p-8 border-b-2 border-[#1C1B22] relative z-10">
+      <header id="header" className="holo-header p-4 md:p-8 border-b-2 relative z-10">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <a href="/" className="text-xl md:text-2xl font-black tracking-tight relative hover:opacity-80 transition-opacity">
             {personalInfo.title}
@@ -282,7 +282,7 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
 
       {/* Blog */}
       {sections?.blog?.enabled && sections.blog.markdownsPeek?.repo && (
-        <section id="blog" className="px-4 py-12 md:px-8 md:py-24 border-t-2 border-[#1C1B22] relative z-10">
+        <section id="blog" className="px-4 py-12 md:px-8 md:py-24 border-t-2 relative z-10">
           <div className="max-w-7xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-black mb-12 tracking-tight relative">
               {sections?.blog?.title?.first} <span className="holo-text-blog">{sections?.blog?.title?.second}</span>
@@ -323,7 +323,7 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
       )}
 
       {/* Work Experience */}
-      <section id="work" className="px-4 py-12 md:px-8 md:py-24 border-t-2 border-[#1C1B22] relative z-10">
+      <section id="work" className="px-4 py-12 md:px-8 md:py-24 border-t-2 relative z-10">
         <div className="max-w-7xl mx-auto">
                       <h2 className="text-3xl md:text-4xl font-black mb-12 tracking-tight relative">
             {sections?.work?.title?.first} <span className="holo-text-experience">{sections?.work?.title?.second}</span>
@@ -361,7 +361,7 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
 
       {/* Articles */}
       {sections?.articles?.enabled && sections.articles.markdownsPeek?.repo && (
-        <section id="articles" className="px-8 py-16 md:py-24 border-t-2 border-[#1C1B22] relative z-10">
+        <section id="articles" className="px-8 py-16 md:py-24 border-t-2 relative z-10">
           <div className="max-w-7xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-black mb-12 tracking-tight relative">
               {sections?.articles?.title?.first} <span className="holo-text-articles">{sections?.articles?.title?.second}</span>
@@ -402,7 +402,7 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
       )}
 
       {/* Projects */}
-      <section id="projects" className="px-8 py-16 md:py-24 border-t-2 border-[#1C1B22] relative z-10">
+      <section id="projects" className="px-8 py-16 md:py-24 border-t-2 relative z-10">
         <div className="max-w-7xl mx-auto">
                       <h2 className="text-3xl md:text-4xl font-black mb-12 tracking-tight relative">
             {sections?.projects?.title?.first} <span className="holo-text-projects">{sections?.projects?.title?.second}</span>
@@ -416,7 +416,7 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
                 href={project.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`block border border-[#1C1B22] p-6 md:p-8 hover:border-[#667eea] hover:shadow-xl group relative overflow-hidden transition-all duration-300 rounded-lg bg-[#1C1B22] text-[#F3F3F7]`}
+                className={`block border p-6 md:p-8 hover:border-[#667eea] hover:shadow-xl group relative overflow-hidden transition-all duration-300 rounded-lg bg-[#1C1B22] text-[#F3F3F7]`}
               >
                 <div className="absolute inset-0 holo-project-bg opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
                 <div className="relative z-10">
@@ -454,7 +454,7 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
       </section>
 
       {/* Contact */}
-      <section id="contact" className="px-8 py-16 md:py-24 border-t-2 border-[#1C1B22] relative z-10">
+      <section id="contact" className="px-8 py-16 md:py-24 border-t-2 relative z-10">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-16 items-start">
             <div>
@@ -530,7 +530,7 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
       </section>
 
       {/* Footer */}
-      <footer className="px-8 py-16 md:py-20 border-t-2 border-[#1C1B22] relative z-10">
+      <footer className="holo-footer px-8 py-16 md:py-20 border-t-2 relative z-10">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <div className="text-sm font-medium text-gray-600">{contactInfo.footer.copyright}</div>
           <div className="text-sm font-medium text-gray-500">TO INFINITY AND <span className="font-bold text-[#1C1B22]">BEYOND</span></div>
@@ -541,7 +541,7 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
       {showScrollTop && (
         <button
           onClick={scrollToTop}
-          className="fixed bottom-8 right-8 w-12 h-12 bg-[#1C1B22] text-[#F3F3F7] border-2 border-[#1C1B22] hover:bg-[#F3F3F7] hover:text-[#1C1B22] transition-all duration-300 z-50 flex items-center justify-center group"
+          className="fixed bottom-8 right-8 w-12 h-12 bg-[#1C1B22] text-[#F3F3F7] border-2 hover:bg-[#F3F3F7] hover:text-[#1C1B22] transition-all duration-300 z-50 flex items-center justify-center group"
           aria-label="Scroll to top"
         >
           <ChevronUp size={20} className="group-hover:scale-110 transition-transform duration-300" />
