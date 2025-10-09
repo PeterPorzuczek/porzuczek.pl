@@ -415,6 +415,13 @@ h1, h2, h3, h4, h5, h6,
   100% { border-color: #667eea; }
 }
 
+/* Gradient animation for lightning effects */
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
 /* Clean animations removed - using simple transitions only */
 
 /* Minimal transitions for essential interactions */

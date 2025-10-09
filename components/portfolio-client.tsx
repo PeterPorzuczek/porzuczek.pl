@@ -345,41 +345,41 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
                     {job.period}
                   </div>
                   
-                  <div className="grid md:grid-cols-4 gap-4 md:gap-6">
-                    {/* Left column - visual accent */}
-                    <div className="md:col-span-1 flex flex-col justify-between">
-                      {/* Subtle quotation mark */}
-                      <div className="text-5xl md:text-6xl font-black text-gray-100 leading-none select-none opacity-60">"</div>
-                      
-                      {/* Colored dot accent */}
-                      <div className="flex items-center gap-2 mt-4 md:mt-0">
-                        <div className={`w-3 h-3 ${job.accent} group-hover:scale-150 transition-transform duration-300 rounded-full`}></div>
+                  <div className="flex flex-col md:grid md:grid-cols-4 gap-4 md:gap-6">
+                    {/* Mobile: Position first */}
+                    <div className="md:col-span-2 md:order-2">
+                      {/* Position with dot on mobile */}
+                      <div className="flex items-start gap-3 mb-2">
+                        {/* Colored dot accent - inline on mobile */}
+                        <div className={`w-3 h-3 mt-1.5 ${job.accent} group-hover:scale-150 transition-transform duration-300 rounded-full flex-shrink-0`}></div>
+                        
+                        <h3 className="text-lg md:text-xl font-bold font-karrik text-[#1C1B22] leading-tight flex-1">
+                          {job.position}
+                        </h3>
                       </div>
-                    </div>
-                    
-                    {/* Main content */}
-                    <div className="md:col-span-2">
-                      {/* Position */}
-                      <h3 className="text-lg md:text-xl font-bold font-karrik mb-2 text-[#1C1B22] leading-tight">
-                        {job.position}
-                      </h3>
                       
                       {/* Gradient separator line */}
-                      <div className="w-16 h-0.5 bg-gradient-to-r from-[#667eea] to-[#764ba2] mb-3 group-hover:w-24 transition-all duration-500"></div>
+                      <div className="w-16 h-0.5 bg-gradient-to-r from-[#667eea] to-[#764ba2] mb-3 ml-6 md:ml-0 group-hover:w-24 transition-all duration-500"></div>
                       
                       {/* Company */}
-                      <div className="text-sm md:text-base font-semibold mb-4 text-gray-700">
+                      <div className="text-sm md:text-base font-semibold mb-4 text-gray-700 ml-6 md:ml-0">
                         {job.company}
                       </div>
                       
                       {/* Description */}
-                      <p className="text-xs md:text-sm leading-relaxed text-gray-600">
+                      <p className="text-xs md:text-sm leading-relaxed text-gray-600 ml-6 md:ml-0">
                         {job.description}
                       </p>
                     </div>
                     
+                    {/* Left column - visual accent - hidden on mobile, shown on desktop */}
+                    <div className="hidden md:flex md:col-span-1 md:order-1 flex-col justify-between">
+                      {/* Subtle quotation mark */}
+                      <div className="text-6xl font-black text-gray-100 leading-none select-none opacity-60">"</div>
+                    </div>
+                    
                     {/* Right column - technologies */}
-                    <div className="md:col-span-1 flex flex-col justify-between">
+                    <div className="md:col-span-1 md:order-3 flex flex-col justify-between ml-6 md:ml-0">
                       <div className="text-xs font-medium text-gray-500 leading-relaxed">
                         {job.technologies}
                       </div>
@@ -482,27 +482,39 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
                     </div>
                   )}
                   
-                  {/* Content Box - Refined overlapping style */}
-                  <div className="bg-white border-2 border-gray-200 group-hover:border-[#667eea] p-5 -mt-6 mx-3 relative z-10 shadow-lg group-hover:shadow-xl transition-all duration-300 rounded-lg">
-                    {/* Project name */}
-                    <h3 className="text-base font-bold font-karrik mb-2 text-[#1C1B22] leading-tight">
-                      {project.name}
-                    </h3>
+                  {/* Content Box - Gradient glow style */}
+                  <div className="relative -mt-6 mx-3 z-10">
+                    {/* Gradient glow background - animated */}
+                    <div className="absolute -inset-[1px] bg-gradient-to-r from-[#667eea] via-[#764ba2] to-[#667eea] rounded-lg opacity-0 group-hover:opacity-100 blur-sm transition-opacity duration-500 animate-[gradient_3s_ease_infinite] bg-[length:200%_100%]"></div>
                     
-                    {/* Gradient separator */}
-                    <div className="w-12 h-0.5 bg-gradient-to-r from-[#667eea] to-[#764ba2] mb-3 group-hover:w-20 transition-all duration-500"></div>
-                    
-                    {/* Description */}
-                    <p className="text-xs mb-3 leading-relaxed text-gray-600">
-                      {project.description}
-                    </p>
-                    
-                    {/* Tech with arrow */}
-                    <div className="flex items-center justify-between">
-                      <div className="text-[10px] font-medium uppercase tracking-wider text-gray-500">
-                        {project.tech}
+                    {/* Main content box */}
+                    <div className="relative bg-white border border-gray-200 group-hover:border-transparent p-5 rounded-lg backdrop-blur-xl transition-all duration-300">
+                      {/* Lightning effect corners */}
+                      <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-[#667eea] opacity-0 group-hover:opacity-60 transition-opacity duration-300 rounded-tl-lg"></div>
+                      <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-[#764ba2] opacity-0 group-hover:opacity-60 transition-opacity duration-300 rounded-br-lg"></div>
+                      
+                      {/* Project name */}
+                      <h3 className="text-base font-bold font-karrik mb-2 text-[#1C1B22] leading-tight group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[#667eea] group-hover:to-[#764ba2] transition-all duration-300">
+                        {project.name}
+                      </h3>
+                      
+                      {/* Gradient separator - animated */}
+                      <div className="relative h-0.5 mb-3 overflow-hidden">
+                        <div className="absolute inset-0 bg-gradient-to-r from-[#667eea] via-[#764ba2] to-[#667eea] bg-[length:200%_100%] animate-[gradient_3s_ease_infinite] w-12 group-hover:w-full transition-all duration-500"></div>
                       </div>
-                      <ArrowUpRight size={16} className="text-gray-400 group-hover:text-[#667eea] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" />
+                      
+                      {/* Description */}
+                      <p className="text-xs mb-3 leading-relaxed text-gray-600">
+                        {project.description}
+                      </p>
+                      
+                      {/* Tech with arrow */}
+                      <div className="flex items-center justify-between">
+                        <div className="text-[10px] font-medium uppercase tracking-wider text-gray-500 group-hover:text-[#667eea] transition-colors duration-300">
+                          {project.tech}
+                        </div>
+                        <ArrowUpRight size={16} className="text-gray-400 group-hover:text-[#667eea] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" />
+                      </div>
                     </div>
                   </div>
                 </div>
