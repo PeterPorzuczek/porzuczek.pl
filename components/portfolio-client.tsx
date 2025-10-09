@@ -330,29 +330,67 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
             <div className="absolute -bottom-2 left-0 w-24 h-1 holo-gradient-experience"></div>
           </h2>
 
-          <div className="space-y-8">
+          <div className="space-y-6">
             {workExperience.map((job, index) => (
               <a 
                 key={index} 
                 href={socialLinks.linkedin.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="work-block grid md:grid-cols-4 gap-4 md:gap-6 border border-gray-200 mb-4 relative group cursor-pointer hover:bg-gray-50 hover:border-[#667eea] hover:shadow-lg transition-all duration-300 block p-6 md:p-8 rounded-lg"
+                className="block relative group cursor-pointer transition-all duration-300 hover:-translate-y-1"
               >
-                <div className="text-xs md:text-sm font-medium text-gray-500">{job.period}</div>
-                <div className="md:col-span-2">
-                  <h3 className="text-lg md:text-xl font-bold mb-2 relative font-karrik flex items-center pl-6">
-                    {job.position}
-                    <div className={`absolute left-0 w-2 h-2 ${job.accent} group-hover:scale-150 transition-transform duration-300`}></div>
-                  </h3>
-                  <div className="text-sm md:text-base font-semibold mb-4 text-gray-700">
-                    {job.company}
+                <div className="bg-white border-2 border-gray-200 group-hover:border-[#667eea] rounded-lg p-6 md:p-8 hover:shadow-xl transition-all duration-300 relative">
+                  {/* Period badge - subtle */}
+                  <div className="absolute -top-3 -right-3 bg-[#1C1B22] text-[#F3F3F7] px-3 py-1.5 text-[10px] font-bold tracking-wider z-10 rounded shadow-md">
+                    {job.period}
                   </div>
-                  <p className="text-sm md:text-base leading-relaxed text-gray-600">
-                    {job.description}
-                  </p>
+                  
+                  <div className="grid md:grid-cols-4 gap-4 md:gap-6">
+                    {/* Left column - visual accent */}
+                    <div className="md:col-span-1 flex flex-col justify-between">
+                      {/* Subtle quotation mark */}
+                      <div className="text-5xl md:text-6xl font-black text-gray-100 leading-none select-none opacity-60">"</div>
+                      
+                      {/* Colored dot accent */}
+                      <div className="flex items-center gap-2 mt-4 md:mt-0">
+                        <div className={`w-3 h-3 ${job.accent} group-hover:scale-150 transition-transform duration-300 rounded-full`}></div>
+                      </div>
+                    </div>
+                    
+                    {/* Main content */}
+                    <div className="md:col-span-2">
+                      {/* Position */}
+                      <h3 className="text-lg md:text-xl font-bold font-karrik mb-2 text-[#1C1B22] leading-tight">
+                        {job.position}
+                      </h3>
+                      
+                      {/* Gradient separator line */}
+                      <div className="w-16 h-0.5 bg-gradient-to-r from-[#667eea] to-[#764ba2] mb-3 group-hover:w-24 transition-all duration-500"></div>
+                      
+                      {/* Company */}
+                      <div className="text-sm md:text-base font-semibold mb-4 text-gray-700">
+                        {job.company}
+                      </div>
+                      
+                      {/* Description */}
+                      <p className="text-xs md:text-sm leading-relaxed text-gray-600">
+                        {job.description}
+                      </p>
+                    </div>
+                    
+                    {/* Right column - technologies */}
+                    <div className="md:col-span-1 flex flex-col justify-between">
+                      <div className="text-xs font-medium text-gray-500 leading-relaxed">
+                        {job.technologies}
+                      </div>
+                      
+                      {/* Arrow indicator - subtle */}
+                      <div className="flex items-center gap-1 text-gray-400 group-hover:text-[#667eea] transition-colors mt-4 md:mt-0">
+                        <ArrowUpRight size={16} />
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div className="text-xs md:text-sm font-medium text-gray-500">{job.technologies}</div>
               </a>
             ))}
           </div>
@@ -416,68 +454,55 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
                 href={project.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block group relative overflow-visible transition-all duration-300 hover:-translate-y-2"
+                className="block group relative overflow-visible transition-all duration-300 hover:-translate-y-1"
               >
                 <div className="relative">
                   {/* Project Image */}
                   {project.image && (
-                    <div className="relative w-full h-56 overflow-hidden bg-gray-900 rounded-lg">
+                    <div className="relative w-full h-56 overflow-hidden bg-gray-900 rounded-lg border-2 border-gray-200 group-hover:border-[#667eea]">
                       <img
                         src={project.image}
                         alt={project.name}
-                        className="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-700 group-hover:scale-110"
+                        className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105"
                       />
                       
-                      {/* Dark overlay */}
-                      <div className="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-all duration-500"></div>
+                      {/* Subtle overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/40"></div>
                       
-                      {/* Virgil signature: Large quotation mark overlay */}
-                      <div className="absolute top-4 left-4 text-white/20 text-8xl font-black leading-none pointer-events-none select-none">"</div>
+                      {/* Subtle quotation mark */}
+                      <div className="absolute top-3 left-3 text-white/30 text-5xl font-black leading-none pointer-events-none select-none">"</div>
                       
-                      {/* Industrial tape stripe - Virgil signature */}
-                      <div className="absolute top-8 -right-2 w-24 h-8 bg-black transform rotate-12 flex items-center justify-center border-2 border-white shadow-lg rounded">
-                        <span className="text-white text-[10px] font-black tracking-widest">{project.year}</span>
+                      {/* Year badge - refined */}
+                      <div className="absolute top-3 right-3 bg-[#F3F3F7]/95 backdrop-blur-sm text-[#1C1B22] px-3 py-1 text-[10px] font-bold tracking-wider rounded shadow-md">
+                        {project.year}
                       </div>
                       
-                      {/* Arrow indicator - bottom left */}
-                      <div className="absolute bottom-4 left-4 text-white/80 group-hover:text-white transition-colors">
-                        <div className="flex items-center gap-1 text-xs font-black tracking-widest">
-                          <span>→</span>
-                          <span>VIEW</span>
-                        </div>
-                      </div>
-                      
-                      {/* Diagonal stripe accent on hover */}
-                      <div className="absolute top-0 right-0 w-20 h-full bg-gradient-to-br from-orange-500/0 via-orange-500/30 to-yellow-400/50 transform translate-x-full group-hover:translate-x-0 transition-transform duration-700 skew-x-12"></div>
+                      {/* Gradient line at bottom on hover */}
+                      <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[#667eea] to-[#764ba2] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
                     </div>
                   )}
                   
-                  {/* Content Box - Overlapping style */}
-                  <div className="bg-white border-4 border-black p-5 -mt-6 mx-4 relative z-10 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] group-hover:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] transition-all duration-300 rounded-lg">
-                    {/* Project name with quotes - Virgil signature */}
-                    <h3 className="text-lg font-bold font-karrik mb-2 uppercase tracking-tight text-black leading-tight">
-                      "{project.name}"
+                  {/* Content Box - Refined overlapping style */}
+                  <div className="bg-white border-2 border-gray-200 group-hover:border-[#667eea] p-5 -mt-6 mx-3 relative z-10 shadow-lg group-hover:shadow-xl transition-all duration-300 rounded-lg">
+                    {/* Project name */}
+                    <h3 className="text-base font-bold font-karrik mb-2 text-[#1C1B22] leading-tight">
+                      {project.name}
                     </h3>
                     
-                    {/* Black separator line */}
-                    <div className="w-12 h-1 bg-black mb-3"></div>
+                    {/* Gradient separator */}
+                    <div className="w-12 h-0.5 bg-gradient-to-r from-[#667eea] to-[#764ba2] mb-3 group-hover:w-20 transition-all duration-500"></div>
                     
                     {/* Description */}
-                    <p className="text-[11px] mb-3 leading-relaxed text-gray-700 uppercase tracking-wide font-bold">
+                    <p className="text-xs mb-3 leading-relaxed text-gray-600">
                       {project.description}
                     </p>
                     
-                    {/* Tech with arrow accent */}
+                    {/* Tech with arrow */}
                     <div className="flex items-center justify-between">
-                      <div className="text-[10px] font-black uppercase tracking-widest text-black">
+                      <div className="text-[10px] font-medium uppercase tracking-wider text-gray-500">
                         {project.tech}
                       </div>
-                      <ArrowUpRight size={18} className="text-black group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
-                    </div>
-                    
-                    {/* Corner label - industrial style */}
-                    <div className="absolute -bottom-2 -right-2 bg-orange-500 text-black px-3 py-1 text-[8px] font-black tracking-widest transform rotate-3">
-                      PROJECT
+                      <ArrowUpRight size={16} className="text-gray-400 group-hover:text-[#667eea] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" />
                     </div>
                   </div>
                 </div>
