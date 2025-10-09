@@ -361,7 +361,7 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
 
       {/* Articles */}
       {sections?.articles?.enabled && sections.articles.markdownsPeek?.repo && (
-        <section id="articles" className="px-8 py-16 md:py-24 border-t-2 relative z-10">
+        <section id="articles" className="px-4 py-12 md:px-8 md:py-24 border-t-2 relative z-10">
           <div className="max-w-7xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-black mb-12 tracking-tight relative">
               {sections?.articles?.title?.first} <span className="holo-text-articles">{sections?.articles?.title?.second}</span>
