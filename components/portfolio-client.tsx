@@ -404,49 +404,81 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
       {/* Projects */}
       <section id="projects" className="px-8 py-16 md:py-24 border-t-2 relative z-10">
         <div className="max-w-7xl mx-auto">
-                      <h2 className="text-3xl md:text-4xl font-black mb-12 tracking-tight relative">
+          <h2 className="text-3xl md:text-4xl font-black mb-12 tracking-tight relative">
             {sections?.projects?.title?.first} <span className="holo-text-projects">{sections?.projects?.title?.second}</span>
             <div className="absolute -bottom-2 left-0 w-24 h-1 holo-gradient-projects"></div>
           </h2>
 
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {shuffledProjects.map((project, index) => (
               <a
                 key={index}
                 href={project.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`block border hover:border-[#667eea] hover:shadow-xl group relative overflow-hidden transition-all duration-300 rounded-lg bg-[#1C1B22] text-[#F3F3F7]`}
+                className="block group relative overflow-visible transition-all duration-300 hover:-translate-y-2"
               >
-                {/* Project Image */}
-                {project.image && (
-                  <div className="relative w-full h-48 overflow-hidden">
-                    <img
-                      src={project.image}
-                      alt={project.name}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#1C1B22] opacity-60"></div>
-                    {/* Year badge on image */}
-                    <div className="absolute top-3 right-3 bg-[#F3F3F7]/90 backdrop-blur-sm text-[#1C1B22] px-3 py-1 text-xs font-bold rounded">
-                      {project.year}
+                <div className="relative">
+                  {/* Project Image */}
+                  {project.image && (
+                    <div className="relative w-full h-56 overflow-hidden bg-gray-900 rounded-lg">
+                      <img
+                        src={project.image}
+                        alt={project.name}
+                        className="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-700 group-hover:scale-110"
+                      />
+                      
+                      {/* Dark overlay */}
+                      <div className="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-all duration-500"></div>
+                      
+                      {/* Virgil signature: Large quotation mark overlay */}
+                      <div className="absolute top-4 left-4 text-white/20 text-8xl font-black leading-none pointer-events-none select-none">"</div>
+                      
+                      {/* Industrial tape stripe - Virgil signature */}
+                      <div className="absolute top-8 -right-2 w-24 h-8 bg-black transform rotate-12 flex items-center justify-center border-2 border-white shadow-lg rounded">
+                        <span className="text-white text-[10px] font-black tracking-widest">{project.year}</span>
+                      </div>
+                      
+                      {/* Arrow indicator - bottom left */}
+                      <div className="absolute bottom-4 left-4 text-white/80 group-hover:text-white transition-colors">
+                        <div className="flex items-center gap-1 text-xs font-black tracking-widest">
+                          <span>→</span>
+                          <span>VIEW</span>
+                        </div>
+                      </div>
+                      
+                      {/* Diagonal stripe accent on hover */}
+                      <div className="absolute top-0 right-0 w-20 h-full bg-gradient-to-br from-orange-500/0 via-orange-500/30 to-yellow-400/50 transform translate-x-full group-hover:translate-x-0 transition-transform duration-700 skew-x-12"></div>
                     </div>
-                  </div>
-                )}
-                
-                <div className="absolute inset-0 holo-project-bg opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
-                <div className="relative z-10 p-6 md:p-8">
-                  <div className="flex justify-between items-start mb-4">
-                    <h3 className="text-xl font-bold font-karrik text-[#F3F3F7] flex-1">{project.name}</h3>
-                    <div className="text-[#F3F3F7] opacity-80 group-hover:opacity-100 relative ml-2">
-                      <ArrowUpRight size={20} />
-                      <div className="absolute -inset-1 holo-glow opacity-0 group-hover:opacity-50 transition-opacity duration-300"></div>
+                  )}
+                  
+                  {/* Content Box - Overlapping style */}
+                  <div className="bg-white border-4 border-black p-5 -mt-6 mx-4 relative z-10 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] group-hover:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] transition-all duration-300 rounded-lg">
+                    {/* Project name with quotes - Virgil signature */}
+                    <h3 className="text-lg font-bold font-karrik mb-2 uppercase tracking-tight text-black leading-tight">
+                      "{project.name}"
+                    </h3>
+                    
+                    {/* Black separator line */}
+                    <div className="w-12 h-1 bg-black mb-3"></div>
+                    
+                    {/* Description */}
+                    <p className="text-[11px] mb-3 leading-relaxed text-gray-700 uppercase tracking-wide font-bold">
+                      {project.description}
+                    </p>
+                    
+                    {/* Tech with arrow accent */}
+                    <div className="flex items-center justify-between">
+                      <div className="text-[10px] font-black uppercase tracking-widest text-black">
+                        {project.tech}
+                      </div>
+                      <ArrowUpRight size={18} className="text-black group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
                     </div>
-                  </div>
-                  <p className="text-sm mb-4 leading-relaxed text-[#F3F3F7] opacity-90">{project.description}</p>
-                  <div className="text-sm font-medium text-[#F3F3F7] opacity-70 relative">
-                    {project.tech}
-                    <div className="absolute -bottom-1 left-0 w-0 h-0.5 holo-gradient group-hover:w-full transition-all duration-500"></div>
+                    
+                    {/* Corner label - industrial style */}
+                    <div className="absolute -bottom-2 -right-2 bg-orange-500 text-black px-3 py-1 text-[8px] font-black tracking-widest transform rotate-3">
+                      PROJECT
+                    </div>
                   </div>
                 </div>
               </a>
