@@ -416,18 +416,33 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
                 href={project.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`block border p-6 md:p-8 hover:border-[#667eea] hover:shadow-xl group relative overflow-hidden transition-all duration-300 rounded-lg bg-[#1C1B22] text-[#F3F3F7]`}
+                className={`block border hover:border-[#667eea] hover:shadow-xl group relative overflow-hidden transition-all duration-300 rounded-lg bg-[#1C1B22] text-[#F3F3F7]`}
               >
+                {/* Project Image */}
+                {project.image && (
+                  <div className="relative w-full h-48 overflow-hidden">
+                    <img
+                      src={project.image}
+                      alt={project.name}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#1C1B22] opacity-60"></div>
+                    {/* Year badge on image */}
+                    <div className="absolute top-3 right-3 bg-[#F3F3F7]/90 backdrop-blur-sm text-[#1C1B22] px-3 py-1 text-xs font-bold rounded">
+                      {project.year}
+                    </div>
+                  </div>
+                )}
+                
                 <div className="absolute inset-0 holo-project-bg opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
-                <div className="relative z-10">
+                <div className="relative z-10 p-6 md:p-8">
                   <div className="flex justify-between items-start mb-4">
-                    <div className="text-sm font-medium text-[#F3F3F7] opacity-60">{project.year}</div>
-                    <div className="text-[#F3F3F7] opacity-80 group-hover:opacity-100 relative">
+                    <h3 className="text-xl font-bold font-karrik text-[#F3F3F7] flex-1">{project.name}</h3>
+                    <div className="text-[#F3F3F7] opacity-80 group-hover:opacity-100 relative ml-2">
                       <ArrowUpRight size={20} />
                       <div className="absolute -inset-1 holo-glow opacity-0 group-hover:opacity-50 transition-opacity duration-300"></div>
                     </div>
                   </div>
-                  <h3 className="text-xl font-bold mb-2 font-karrik text-[#F3F3F7]">{project.name}</h3>
                   <p className="text-sm mb-4 leading-relaxed text-[#F3F3F7] opacity-90">{project.description}</p>
                   <div className="text-sm font-medium text-[#F3F3F7] opacity-70 relative">
                     {project.tech}
