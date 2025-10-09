@@ -201,7 +201,7 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
           <div className="grid lg:grid-cols-2 gap-16 items-start">
             <div className="space-y-8">
               <div>
-                <h1 className="text-4xl sm:text-6xl md:text-8xl font-black leading-none mb-6 tracking-tighter relative">
+                <h1 className="text-5xl sm:text-6xl md:text-8xl font-black leading-none mb-6 tracking-tighter relative">
                   {sections?.hero?.title?.first}
                   <br />
                   <span className="holo-text">{sections?.hero?.title?.second}</span>
@@ -339,20 +339,20 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
                 rel="noopener noreferrer"
                 className="work-block grid md:grid-cols-4 gap-4 md:gap-6 border border-gray-200 mb-4 relative group cursor-pointer hover:bg-gray-50 hover:border-[#667eea] hover:shadow-lg transition-all duration-300 block p-6 md:p-8 rounded-lg"
               >
-                <div className="text-sm font-medium text-gray-500">{job.period}</div>
+                <div className="text-xs md:text-sm font-medium text-gray-500">{job.period}</div>
                 <div className="md:col-span-2">
-                  <h3 className="text-xl font-bold mb-2 relative font-karrik flex items-center pl-6">
+                  <h3 className="text-lg md:text-xl font-bold mb-2 relative font-karrik flex items-center pl-6">
                     {job.position}
                     <div className={`absolute left-0 w-2 h-2 ${job.accent} group-hover:scale-150 transition-transform duration-300`}></div>
                   </h3>
-                  <div className="text-base font-semibold mb-4 text-gray-700">
+                  <div className="text-sm md:text-base font-semibold mb-4 text-gray-700">
                     {job.company}
                   </div>
-                  <p className="text-base leading-relaxed text-gray-600">
+                  <p className="text-sm md:text-base leading-relaxed text-gray-600">
                     {job.description}
                   </p>
                 </div>
-                <div className="text-sm font-medium text-gray-500">{job.technologies}</div>
+                <div className="text-xs md:text-sm font-medium text-gray-500">{job.technologies}</div>
               </a>
             ))}
           </div>
@@ -505,19 +505,19 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-16 items-start">
             <div>
-              <h2 className="text-4xl font-black mb-8 uppercase tracking-tighter relative">
+              <h2 className="text-3xl md:text-4xl font-black mb-8 uppercase tracking-tighter relative">
                 {sections?.contact?.title?.first} <span className="holo-text-together">{sections?.contact?.title?.second}</span>
                 <div className="absolute -bottom-2 left-0 w-24 h-1 holo-gradient-together"></div>
               </h2>
-              <p className="text-lg leading-relaxed mb-8">
+              <p className="text-base md:text-lg leading-relaxed mb-8">
                 {contactInfo.description}
               </p>
               <div className="space-y-4">
-                <a href={`mailto:${personalInfo.email}`} className="block text-base font-medium relative group hover:underline flex items-center pl-6">
+                <a href={`mailto:${personalInfo.email}`} className="block text-sm md:text-base font-medium relative group hover:underline flex items-center pl-6">
                   {personalInfo.email}
                   <div className="absolute left-0 w-2 h-2 holo-dot group-hover:scale-150 transition-transform duration-300"></div>
                 </a>
-                <div className="text-base font-medium text-gray-700 relative group flex items-center pl-6">
+                <div className="text-sm md:text-base font-medium text-gray-700 relative group flex items-center pl-6">
                   {personalInfo.location}
                   <div className="absolute left-0 w-2 h-2 holo-dot-2 group-hover:scale-150 transition-transform duration-300"></div>
                 </div>
