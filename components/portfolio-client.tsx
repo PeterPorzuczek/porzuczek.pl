@@ -459,7 +459,7 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
                 <div className="relative">
                   {/* Project Image */}
                   {project.image && (
-                    <div className="relative w-full h-56 overflow-hidden bg-gray-900 rounded-lg border-2 border-gray-200 group-hover:border-[#667eea]">
+                    <div className="relative h-56 overflow-hidden bg-gray-900 rounded-lg border-2 border-gray-200 group-hover:border-[#667eea] md:ml-4">
                       <img
                         src={project.image}
                         alt={project.name}
@@ -482,38 +482,32 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
                     </div>
                   )}
                   
-                  {/* Content Box - Gradient glow style */}
-                  <div className="relative -mt-6 mx-3 z-10">
-                    {/* Gradient glow background - animated */}
-                    <div className="absolute -inset-[1px] bg-gradient-to-r from-[#667eea] via-[#764ba2] to-[#667eea] rounded-lg opacity-0 group-hover:opacity-100 blur-sm transition-opacity duration-500 animate-[gradient_3s_ease_infinite] bg-[length:200%_100%]"></div>
+                  {/* Content Box - Dark style diagonal overlap */}
+                  <div className="relative -mt-8 md:mr-4 z-10">
+                    {/* Subtle gradient glow on hover only */}
+                    <div className="absolute -inset-[0.5px] bg-gradient-to-r from-[#667eea] to-[#764ba2] rounded-lg opacity-0 group-hover:opacity-50 transition-opacity duration-300"></div>
                     
-                    {/* Main content box */}
-                    <div className="relative bg-white border border-gray-200 group-hover:border-transparent p-5 rounded-lg backdrop-blur-xl transition-all duration-300">
-                      {/* Lightning effect corners */}
-                      <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-[#667eea] opacity-0 group-hover:opacity-60 transition-opacity duration-300 rounded-tl-lg"></div>
-                      <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-[#764ba2] opacity-0 group-hover:opacity-60 transition-opacity duration-300 rounded-br-lg"></div>
-                      
+                    {/* Main content box - DARK, diagonal overlap */}
+                    <div className="relative bg-[#1C1B22] border-2 border-[#2a2930] group-hover:border-[#667eea]/50 p-5 rounded-lg transition-all duration-300 h-[140px] flex flex-col">
                       {/* Project name */}
-                      <h3 className="text-base font-bold font-karrik mb-2 text-[#1C1B22] leading-tight group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[#667eea] group-hover:to-[#764ba2] transition-all duration-300">
+                      <h3 className="text-base font-bold font-karrik mb-2 text-[#F3F3F7] leading-tight">
                         {project.name}
                       </h3>
                       
-                      {/* Gradient separator - animated */}
-                      <div className="relative h-0.5 mb-3 overflow-hidden">
-                        <div className="absolute inset-0 bg-gradient-to-r from-[#667eea] via-[#764ba2] to-[#667eea] bg-[length:200%_100%] animate-[gradient_3s_ease_infinite] w-12 group-hover:w-full transition-all duration-500"></div>
-                      </div>
+                      {/* Gradient separator - simple */}
+                      <div className="w-12 h-0.5 bg-gradient-to-r from-[#667eea] to-[#764ba2] mb-3 group-hover:w-20 transition-all duration-300"></div>
                       
                       {/* Description */}
-                      <p className="text-xs mb-3 leading-relaxed text-gray-600">
+                      <p className="text-xs mb-3 leading-relaxed text-gray-400 flex-1">
                         {project.description}
                       </p>
                       
                       {/* Tech with arrow */}
-                      <div className="flex items-center justify-between">
-                        <div className="text-[10px] font-medium uppercase tracking-wider text-gray-500 group-hover:text-[#667eea] transition-colors duration-300">
+                      <div className="flex items-center justify-between mt-auto">
+                        <div className="text-[10px] font-medium uppercase tracking-wider text-gray-500">
                           {project.tech}
                         </div>
-                        <ArrowUpRight size={16} className="text-gray-400 group-hover:text-[#667eea] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" />
+                        <ArrowUpRight size={16} className="text-gray-600 group-hover:text-[#667eea] transition-colors duration-300" />
                       </div>
                     </div>
                   </div>
