@@ -454,62 +454,59 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
                 href={project.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block group relative overflow-visible transition-all duration-300 hover:-translate-y-1"
+                className="block group relative overflow-hidden rounded-lg border-2 border-gray-200 group-hover:border-[#667eea] transition-all duration-300 hover:-translate-y-1 h-[280px]"
               >
-                <div className="relative">
-                  {/* Project Image */}
-                  {project.image && (
-                    <div className="relative h-56 overflow-hidden bg-gray-900 rounded-lg border-2 border-gray-200 group-hover:border-[#667eea] md:ml-4">
-                      <img
-                        src={project.image}
-                        alt={project.name}
-                        className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105"
-                      />
-                      
-                      {/* Subtle overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/40"></div>
-                      
-                      {/* Subtle quotation mark */}
-                      <div className="absolute top-3 left-3 text-white/30 text-5xl font-black leading-none pointer-events-none select-none">"</div>
-                      
-                      {/* Year badge - refined */}
-                      <div className="absolute top-3 right-3 bg-[#F3F3F7]/95 backdrop-blur-sm text-[#1C1B22] px-3 py-1 text-[10px] font-bold tracking-wider rounded shadow-md">
-                        {project.year}
-                      </div>
-                      
-                      {/* Gradient line at bottom on hover */}
-                      <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[#667eea] to-[#764ba2] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
-                    </div>
-                  )}
-                  
-                  {/* Content Box - Dark style diagonal overlap */}
-                  <div className="relative -mt-8 md:mr-4 z-10">
-                    {/* Subtle gradient glow on hover only */}
-                    <div className="absolute -inset-[0.5px] bg-gradient-to-r from-[#667eea] to-[#764ba2] rounded-lg opacity-0 group-hover:opacity-50 transition-opacity duration-300"></div>
+                {/* Background Image */}
+                {project.image && (
+                  <div className="absolute inset-0">
+                    <img
+                      src={project.image}
+                      alt={project.name}
+                      className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105"
+                    />
+                    {/* Dark overlay for text readability */}
+                    <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/80 to-black/90"></div>
+                  </div>
+                )}
+                
+                {/* Content overlay */}
+                <div className="relative z-10 h-full p-5 flex flex-col">
+                  {/* Top section */}
+                  <div className="flex justify-between items-start mb-auto">
+                    {/* Subtle quotation mark */}
+                    <div className="text-white/40 text-4xl font-black leading-none select-none">"</div>
                     
-                    {/* Main content box - DARK, diagonal overlap */}
-                    <div className="relative bg-[#1C1B22] border-2 border-[#2a2930] group-hover:border-[#667eea]/50 p-5 rounded-lg transition-all duration-300 h-[140px] flex flex-col">
-                      {/* Project name */}
-                      <h3 className="text-base font-bold font-karrik mb-2 text-[#F3F3F7] leading-tight">
-                        {project.name}
-                      </h3>
-                      
-                      {/* Gradient separator - simple */}
-                      <div className="w-12 h-0.5 bg-gradient-to-r from-[#667eea] to-[#764ba2] mb-3 group-hover:w-20 transition-all duration-300"></div>
-                      
-                      {/* Description */}
-                      <p className="text-xs mb-3 leading-relaxed text-gray-400 flex-1">
-                        {project.description}
-                      </p>
-                      
-                      {/* Tech with arrow */}
-                      <div className="flex items-center justify-between mt-auto">
-                        <div className="text-[10px] font-medium uppercase tracking-wider text-gray-500">
-                          {project.tech}
-                        </div>
-                        <ArrowUpRight size={16} className="text-gray-600 group-hover:text-[#667eea] transition-colors duration-300" />
-                      </div>
+                    {/* Year badge */}
+                    <div className="bg-[#1C1B22]/80 backdrop-blur-sm text-[#F3F3F7] px-3 py-1 text-[9px] font-bold tracking-widest rounded border border-gray-700">
+                      {project.year}
                     </div>
+                  </div>
+                  
+                  {/* Bottom section with content */}
+                  <div className="mt-auto">
+                    {/* Project name */}
+                    <h3 className="text-lg font-bold font-karrik mb-2 text-[#F3F3F7] leading-tight">
+                      {project.name}
+                    </h3>
+                    
+                    {/* Gradient separator */}
+                    <div className="w-12 h-0.5 bg-gradient-to-r from-[#667eea] to-[#764ba2] mb-3 group-hover:w-20 transition-all duration-300"></div>
+                    
+                    {/* Description */}
+                    <p className="text-xs mb-3 leading-relaxed text-gray-300">
+                      {project.description}
+                    </p>
+                    
+                    {/* Tech with arrow */}
+                    <div className="flex items-center justify-between">
+                      <div className="text-[10px] font-medium uppercase tracking-wider text-gray-400">
+                        {project.tech}
+                      </div>
+                      <ArrowUpRight size={16} className="text-gray-400 group-hover:text-[#667eea] transition-colors duration-300" />
+                    </div>
+                    
+                    {/* Gradient line at bottom */}
+                    <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[#667eea] to-[#764ba2] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
                   </div>
                 </div>
               </a>
