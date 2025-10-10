@@ -339,32 +339,33 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
                 rel="noopener noreferrer"
                 className="block relative group cursor-pointer transition-all duration-300 hover:-translate-y-1"
               >
-                <div className="bg-white border-2 border-gray-200 group-hover:border-[#667eea] rounded-lg p-6 md:p-8 hover:shadow-xl transition-all duration-300 relative">
+                <div className="bg-[#fbfbfb] border-2 border-[#1C1B22]/10 group-hover:border-[#667eea] rounded-lg p-6 md:p-8 hover:shadow-xl transition-all duration-300 relative min-h-[220px]">
                   {/* Period badge - subtle */}
-                  <div className="absolute -top-3 -right-3 bg-[#1C1B22] text-[#F3F3F7] px-3 py-1.5 text-[10px] font-bold tracking-wider z-10 rounded shadow-md">
+                  <div className="absolute -top-3 -right-3 bg-[#1C1B22]/90 text-[#F3F3F7] px-3 py-1.5 text-[10px] font-bold tracking-wider z-10 rounded shadow-md">
                     {job.period}
                   </div>
                   
                   <div className="flex flex-col md:grid md:grid-cols-4 gap-4 md:gap-6">
-                    {/* Mobile: Position first */}
+                    {/* Mobile: Position first with company */}
                     <div className="md:col-span-2 md:order-2">
-                      {/* Position with dot on mobile */}
+                      {/* Position with dot and company on mobile */}
                       <div className="flex items-start gap-3 mb-2">
                         {/* Colored dot accent - inline on mobile */}
                         <div className={`w-3 h-3 mt-1.5 ${job.accent} group-hover:scale-150 transition-transform duration-300 rounded-full flex-shrink-0`}></div>
                         
-                        <h3 className="text-lg md:text-xl font-bold font-karrik text-[#1C1B22] leading-tight flex-1">
-                          {job.position}
-                        </h3>
+                        <div className="flex-1">
+                          <h3 className="text-lg md:text-xl font-bold font-karrik text-[#1C1B22] leading-tight">
+                            {job.position}
+                          </h3>
+                          {/* Company on mobile - shown inline */}
+                          <div className="text-sm font-semibold text-gray-700 md:hidden mt-1">
+                            {job.company}
+                          </div>
+                        </div>
                       </div>
                       
                       {/* Gradient separator line */}
                       <div className="w-16 h-0.5 bg-gradient-to-r from-[#667eea] to-[#764ba2] mb-3 ml-6 md:ml-0 group-hover:w-24 transition-all duration-500"></div>
-                      
-                      {/* Company */}
-                      <div className="text-sm md:text-base font-semibold mb-4 text-gray-700 ml-6 md:ml-0">
-                        {job.company}
-                      </div>
                       
                       {/* Description */}
                       <p className="text-xs md:text-sm leading-relaxed text-gray-600 ml-6 md:ml-0">
@@ -372,10 +373,12 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
                       </p>
                     </div>
                     
-                    {/* Left column - visual accent - hidden on mobile, shown on desktop */}
+                    {/* Left column - Company on desktop */}
                     <div className="hidden md:flex md:col-span-1 md:order-1 flex-col justify-between">
-                      {/* Subtle quotation mark */}
-                      <div className="text-6xl font-black text-gray-100 leading-none select-none opacity-60">"</div>
+                      {/* Company name - same size as before */}
+                      <div className="text-sm md:text-base font-semibold text-gray-700">
+                        {job.company}
+                      </div>
                     </div>
                     
                     {/* Right column - technologies */}
@@ -384,8 +387,8 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
                         {job.technologies}
                       </div>
                       
-                      {/* Arrow indicator - subtle */}
-                      <div className="flex items-center gap-1 text-gray-400 group-hover:text-[#667eea] transition-colors mt-4 md:mt-0">
+                      {/* Arrow indicator */}
+                      <div className="flex items-center gap-1 text-[#1C1B22] group-hover:text-[#667eea] transition-colors mt-4 md:mt-0">
                         <ArrowUpRight size={16} />
                       </div>
                     </div>
