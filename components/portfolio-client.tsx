@@ -12,6 +12,8 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
   const [displayedPhotos, setDisplayedPhotos] = useState<any[]>([])
   const [photoTransition, setPhotoTransition] = useState(true)
   const [shuffledProjects, setShuffledProjects] = useState<any[]>([])
+  const [mobileHeroPhoto, setMobileHeroPhoto] = useState<any>(null)
+  const [mobilePhotoTransition, setMobilePhotoTransition] = useState(true)
 
   // Fetch fresh data from GitHub after component mounts
   useEffect(() => {
@@ -121,6 +123,30 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
     setShuffledProjects(shuffled);
   }, [projects])
 
+  // Mobile hero photo rotation
+  useEffect(() => {
+    if (!photos || photos.length === 0) return;
+    
+    // Initialize with first photo
+    if (!mobileHeroPhoto) {
+      setMobileHeroPhoto(photos[0]);
+      return;
+    }
+    
+    // Rotate photo every 5 seconds
+    const interval = setInterval(() => {
+      setMobilePhotoTransition(false);
+      
+      setTimeout(() => {
+        const randomIndex = Math.floor(Math.random() * photos.length);
+        setMobileHeroPhoto(photos[randomIndex]);
+        setMobilePhotoTransition(true);
+      }, 300);
+    }, 5000);
+    
+    return () => clearInterval(interval);
+  }, [photos, mobileHeroPhoto])
+
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -196,25 +222,44 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
       )}
 
       {/* Hero */}
-      <section id="hero" className="holo-hero px-4 py-12 md:px-8 md:py-36 relative z-10">
+      <section id="hero" className="holo-hero px-4 py-8 md:px-8 md:py-36 relative z-10">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-16 items-start">
-            <div className="space-y-8">
-              <div>
-                <h1 className="text-5xl sm:text-6xl md:text-8xl font-black leading-none mb-6 tracking-tighter relative">
-                  {sections?.hero?.title?.first}
-                  <br />
-                  <span className="holo-text">{sections?.hero?.title?.second}</span>
-                </h1>
+            <div className="space-y-6 md:space-y-8">
+              <div className="flex items-start gap-4">
+                <div className="flex-1">
+                  <h1 className="text-[2.75rem] sm:text-5xl md:text-8xl font-black leading-none mb-4 md:mb-6 tracking-tighter relative">
+                    {sections?.hero?.title?.first}
+                    <br />
+                    <span className="holo-text">{sections?.hero?.title?.second}</span>
+                  </h1>
+                </div>
+                
+                {/* Mobile hero photo - rotating */}
+                <a
+                  href={socialLinks.instagram.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="lg:hidden relative cursor-pointer group block flex-shrink-0 w-[7.5rem] h-[7.5rem] sm:w-40 sm:h-40"
+                >
+                  <div className="relative overflow-hidden rounded-lg border border-gray-200 group-hover:border-[#667eea] group-hover:shadow-lg transition-all duration-300 w-full h-full">
+                    <img
+                      src={mobileHeroPhoto?.url}
+                      alt={mobileHeroPhoto?.caption}
+                      className={`w-full h-full object-cover transition-opacity duration-500 ${mobilePhotoTransition ? "opacity-100" : "opacity-0"}`}
+                    />
+                    <div className="absolute inset-0 holo-overlay opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+                  </div>
+                </a>
               </div>
 
-              <div className="space-y-4 text-base md:text-lg leading-relaxed max-w-lg">
+              <div className="space-y-3 md:space-y-4 text-base md:text-lg leading-relaxed max-w-lg">
                 {personalInfo.bio.map((paragraph, index) => (
                   <p key={index}>{paragraph}</p>
                 ))}
               </div>
 
-              <div className="text-lg font-semibold space-y-2">
+              <div className="text-base md:text-lg font-semibold space-y-2">
                 {personalInfo.roles.map((role, index) => (
                   <div key={index} className="relative pl-6 flex items-center">
                     {role}
@@ -223,7 +268,7 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
                 ))}
               </div>
 
-              <div className="flex gap-6 pt-4">
+              <div className="flex gap-5 pt-3 md:pt-4">
                 <a href={socialLinks.github.url} target="_blank" rel="noopener noreferrer" className="hover:opacity-70 relative group">
                   <Github size={24} />
                   <div className="absolute -inset-2 holo-glow opacity-0 group-hover:opacity-30 transition-opacity duration-300"></div>
@@ -330,7 +375,91 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
             <div className="absolute -bottom-2 left-0 w-24 h-1 holo-gradient-experience"></div>
           </h2>
 
-          <div className="space-y-6">
+          {/* Mobile: Horizontal carousel */}
+          <div className="md:hidden">
+            <div className="overflow-x-auto overflow-y-visible pb-8 snap-x snap-mandatory scroll-smooth scrollbar-hide">
+              <div className="flex gap-4 px-4 py-2">
+                {workExperience.map((job, index) => (
+                  <a 
+                    key={index} 
+                    href={socialLinks.linkedin.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block relative group cursor-pointer transition-all duration-300 flex-shrink-0 w-[85vw] snap-center"
+                  >
+                  <div className="bg-[#fbfbfb] border-2 border-[#1C1B22]/10 group-hover:border-[#667eea] rounded-lg p-6 hover:shadow-xl transition-all duration-300 relative h-[300px]">
+                  {/* Period badge - subtle */}
+                  <div className="absolute -top-3 -right-3 bg-[#1C1B22]/90 text-[#F3F3F7] px-3 py-1.5 text-[10px] font-bold tracking-wider z-10 rounded shadow-md">
+                    {job.period}
+                  </div>
+                  
+                  <div className="flex flex-col md:grid md:grid-cols-4 gap-4 md:gap-6">
+                    {/* Mobile: Position first with company */}
+                    <div className="md:col-span-2 md:order-2">
+                      {/* Position with dot and company on mobile */}
+                      <div className="flex items-start gap-3 mb-2">
+                        {/* Colored dot accent - inline on mobile */}
+                        <div className={`w-3 h-3 mt-1.5 ${job.accent} group-hover:scale-150 transition-transform duration-300 rounded-full flex-shrink-0`}></div>
+                        
+                        <div className="flex-1">
+                          <h3 className="text-lg md:text-xl font-bold font-karrik text-[#1C1B22] leading-tight">
+                            {job.position}
+                          </h3>
+                          {/* Company on mobile - shown inline */}
+                          <div className="text-sm font-semibold text-gray-700 md:hidden mt-1">
+                            {job.company}
+                          </div>
+                        </div>
+                      </div>
+                      
+                      {/* Gradient separator line */}
+                      <div className="w-16 h-0.5 bg-gradient-to-r from-[#667eea] to-[#764ba2] mb-3 ml-6 md:ml-0 group-hover:w-24 transition-all duration-500"></div>
+                      
+                      {/* Description */}
+                      <p className="text-xs md:text-sm leading-relaxed text-gray-600 ml-6 md:ml-0">
+                        {job.description}
+                      </p>
+                    </div>
+                    
+                    {/* Left column - Company on desktop */}
+                    <div className="hidden md:flex md:col-span-1 md:order-1 flex-col justify-between">
+                      {/* Company name - same size as before */}
+                      <div className="text-sm md:text-base font-semibold text-gray-700">
+                        {job.company}
+                      </div>
+                    </div>
+                    
+                    {/* Right column - technologies */}
+                    <div className="md:col-span-1 md:order-3 flex flex-col justify-between ml-6 md:ml-0">
+                      <div className="text-xs font-medium text-gray-500 leading-relaxed">
+                        {job.technologies}
+                      </div>
+                      
+                      {/* Arrow indicator */}
+                      <div className="flex items-center gap-1 text-[#1C1B22] group-hover:text-[#667eea] transition-colors mt-4 md:mt-0">
+                        <ArrowUpRight size={16} />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+                ))}
+              </div>
+            </div>
+            
+            {/* Scroll indicator dots */}
+            <div className="flex justify-center gap-2 mt-2">
+              {workExperience.map((_, index) => (
+                <div 
+                  key={index} 
+                  className="w-2 h-2 rounded-full bg-gray-300"
+                ></div>
+              ))}
+            </div>
+          </div>
+          
+          {/* Desktop: Vertical list */}
+          <div className="hidden md:block space-y-6">
             {workExperience.map((job, index) => (
               <a 
                 key={index} 
@@ -450,7 +579,89 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
             <div className="absolute -bottom-2 left-0 w-24 h-1 holo-gradient-projects"></div>
           </h2>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {/* Mobile: Horizontal carousel */}
+          <div className="md:hidden -mx-8">
+            <div className="overflow-x-auto overflow-y-visible pb-8 snap-x snap-mandatory scroll-smooth scrollbar-hide">
+              <div className="flex gap-4 pl-8 pr-8 py-2">
+                {shuffledProjects.map((project, index) => (
+                  <a
+                    key={index}
+                    href={project.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block group relative overflow-hidden rounded-lg border-2 border-gray-200 group-hover:border-[#667eea] transition-all duration-300 h-[280px] w-[85vw] flex-shrink-0 snap-center"
+                  >
+                {/* Background Image */}
+                {project.image && (
+                  <div className="absolute inset-0">
+                    <img
+                      src={project.image}
+                      alt={project.name}
+                      className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105"
+                    />
+                    {/* Dark overlay for text readability */}
+                    <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/80 to-black/90"></div>
+                  </div>
+                )}
+                
+                {/* Content overlay */}
+                <div className="relative z-10 h-full p-5 flex flex-col">
+                  {/* Top section */}
+                  <div className="flex justify-between items-start mb-auto">
+                    {/* Subtle quotation mark */}
+                    <div className="text-white/40 text-4xl font-black leading-none select-none">"</div>
+                    
+                    {/* Year badge */}
+                    <div className="bg-[#1C1B22]/80 backdrop-blur-sm text-[#F3F3F7] px-3 py-1 text-[9px] font-bold tracking-widest rounded border border-gray-700">
+                      {project.year}
+                    </div>
+                  </div>
+                  
+                  {/* Bottom section with content */}
+                  <div className="mt-auto">
+                    {/* Project name */}
+                    <h3 className="text-lg font-bold font-karrik mb-2 text-[#F3F3F7] leading-tight">
+                      {project.name}
+                    </h3>
+                    
+                    {/* Gradient separator */}
+                    <div className="w-12 h-0.5 bg-gradient-to-r from-[#667eea] to-[#764ba2] mb-3 group-hover:w-20 transition-all duration-300"></div>
+                    
+                    {/* Description */}
+                    <p className="text-xs mb-3 leading-relaxed text-gray-300">
+                      {project.description}
+                    </p>
+                    
+                    {/* Tech with arrow */}
+                    <div className="flex items-center justify-between">
+                      <div className="text-[10px] font-medium uppercase tracking-wider text-gray-400">
+                        {project.tech}
+                      </div>
+                      <ArrowUpRight size={16} className="text-gray-400 group-hover:text-[#667eea] transition-colors duration-300" />
+                    </div>
+                    
+                    {/* Gradient line at bottom */}
+                    <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[#667eea] to-[#764ba2] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+                  </div>
+                </div>
+              </a>
+                ))}
+              </div>
+            </div>
+            
+            {/* Scroll indicator dots */}
+            <div className="flex justify-center gap-2 mt-2">
+              {shuffledProjects.map((_, index) => (
+                <div 
+                  key={index} 
+                  className="w-2 h-2 rounded-full bg-gray-300"
+                ></div>
+              ))}
+            </div>
+          </div>
+          
+          {/* Desktop: Grid */}
+          <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {shuffledProjects.map((project, index) => (
               <a
                 key={index}
