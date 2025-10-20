@@ -190,7 +190,7 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
       const containerRect = container.getBoundingClientRect()
       const containerCenter = containerRect.left + containerRect.width / 2
 
-      items.forEach((item, index) => {
+      items.forEach((item: Element, index: number) => {
         const itemRect = item.getBoundingClientRect()
         const itemCenter = itemRect.left + itemRect.width / 2
         const distance = Math.abs(itemCenter - containerCenter)
@@ -215,7 +215,7 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
       const containerRect = container.getBoundingClientRect()
       const containerCenter = containerRect.left + containerRect.width / 2
 
-      items.forEach((item, index) => {
+      items.forEach((item: Element, index: number) => {
         const itemRect = item.getBoundingClientRect()
         const itemCenter = itemRect.left + itemRect.width / 2
         const distance = Math.abs(itemCenter - containerCenter)
@@ -254,7 +254,7 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
             <div className="absolute -bottom-1 left-0 w-full h-0.5 holo-gradient"></div>
           </a>
           <nav className="hidden md:flex gap-8 text-sm font-medium">
-            {navigation.map((item) => (
+            {navigation.map((item: any) => (
               <a key={item.name} href={item.href} className="relative group text-gray-700 hover:text-[#1C1B22] transition-colors duration-200">
                 {item.name}
                 <div className="absolute -bottom-1 left-0 w-full h-px bg-gray-300 group-hover:bg-[#1C1B22] transition-all duration-200"></div>
@@ -283,7 +283,7 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
             </button>
           </div>
           <nav className="flex flex-col p-4 space-y-4">
-            {navigation.map((item) => (
+            {navigation.map((item: any) => (
               <a 
                 key={item.name} 
                 href={item.href} 
@@ -311,13 +311,13 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
                 </h1>
               </div>
 
-                {/* Mobile hero photo - rotating */}
-                <a
-                  href={socialLinks.instagram.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="lg:hidden relative cursor-pointer group block flex-shrink-0 w-[7.5rem] h-[7.5rem] sm:w-40 sm:h-40"
-                >
+                 {/* Mobile hero photo - rotating */}
+                 <a
+                   href={socialLinks.instagram.url}
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   className="lg:hidden relative cursor-pointer group block flex-shrink-0 w-[7.5rem] h-[7.5rem] sm:w-40 sm:h-40 md:w-80 md:h-80"
+                 >
                   <div className="relative overflow-hidden rounded-lg border border-gray-200 group-hover:border-[#667eea] group-hover:shadow-lg transition-all duration-300 w-full h-full">
                     <img
                       src={mobileHeroPhoto?.url}
@@ -330,13 +330,13 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
               </div>
 
               <div className="space-y-3 md:space-y-4 text-base md:text-lg leading-relaxed max-w-lg">
-                {personalInfo.bio.map((paragraph, index) => (
+                 {personalInfo.bio.map((paragraph: string, index: number) => (
                   <p key={index}>{paragraph}</p>
                 ))}
               </div>
 
               <div className="text-base md:text-lg font-semibold space-y-2">
-                {personalInfo.roles.map((role, index) => (
+                 {personalInfo.roles.map((role: string, index: number) => (
                   <div key={index} className="relative pl-6 flex items-center">
                     {role}
                     <div className={`absolute left-0 w-2 h-2 holo-dot${index === 0 ? '' : `-${index + 1}`}`}></div>
@@ -455,7 +455,7 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
           <div className="md:hidden -mx-4">
             <div ref={workScrollRef} className="overflow-x-auto overflow-y-visible pb-8 snap-x snap-mandatory scroll-smooth scrollbar-hide">
               <div className="flex gap-4 pl-4 pr-4 py-2">
-                {workExperience.map((job, index) => (
+                 {workExperience.map((job: any, index: number) => (
                   <a 
                     key={index} 
                     href={socialLinks.linkedin.url}
@@ -525,7 +525,7 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
             
             {/* Scroll indicator dots */}
             <div className="flex justify-center gap-2 mt-2">
-              {workExperience.map((_, index) => (
+               {workExperience.map((_: any, index: number) => (
                 <button
                   key={index}
                   onClick={() => scrollToWorkItem(index)}
@@ -542,7 +542,7 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
           
           {/* Desktop: Vertical list */}
           <div className="hidden md:block space-y-6">
-            {workExperience.map((job, index) => (
+                 {workExperience.map((job: any, index: number) => (
               <a 
                 key={index} 
                 href={socialLinks.linkedin.url}
