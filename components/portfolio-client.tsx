@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { Github, Linkedin, Instagram, ExternalLink, ArrowUpRight, ChevronUp, Menu, X } from "lucide-react"
 import MarkdownsPeekViewer from './markdowns-peek-viewer'
 
@@ -14,6 +14,10 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
   const [shuffledProjects, setShuffledProjects] = useState<any[]>([])
   const [mobileHeroPhoto, setMobileHeroPhoto] = useState<any>(null)
   const [mobilePhotoTransition, setMobilePhotoTransition] = useState(true)
+  const [activeWorkIndex, setActiveWorkIndex] = useState(0)
+  const [activeProjectIndex, setActiveProjectIndex] = useState(0)
+  const workScrollRef = useRef<HTMLDivElement>(null)
+  const projectScrollRef = useRef<HTMLDivElement>(null)
 
   // Fetch fresh data from GitHub after component mounts
   useEffect(() => {
@@ -154,6 +158,78 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
     })
   }
 
+  const scrollToWorkItem = (index: number) => {
+    const container = workScrollRef.current
+    if (!container) return
+    
+    const items = container.querySelectorAll('a')
+    const item = items[index]
+    if (item) {
+      item.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' })
+    }
+  }
+
+  const scrollToProjectItem = (index: number) => {
+    const container = projectScrollRef.current
+    if (!container) return
+    
+    const items = container.querySelectorAll('a')
+    const item = items[index]
+    if (item) {
+      item.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' })
+    }
+  }
+
+  // Track active work item on scroll
+  useEffect(() => {
+    const container = workScrollRef.current
+    if (!container) return
+
+    const handleScroll = () => {
+      const items = container.querySelectorAll('a')
+      const containerRect = container.getBoundingClientRect()
+      const containerCenter = containerRect.left + containerRect.width / 2
+
+      items.forEach((item, index) => {
+        const itemRect = item.getBoundingClientRect()
+        const itemCenter = itemRect.left + itemRect.width / 2
+        const distance = Math.abs(itemCenter - containerCenter)
+        
+        if (distance < itemRect.width / 2) {
+          setActiveWorkIndex(index)
+        }
+      })
+    }
+
+    container.addEventListener('scroll', handleScroll)
+    return () => container.removeEventListener('scroll', handleScroll)
+  }, [workExperience])
+
+  // Track active project item on scroll
+  useEffect(() => {
+    const container = projectScrollRef.current
+    if (!container) return
+
+    const handleScroll = () => {
+      const items = container.querySelectorAll('a')
+      const containerRect = container.getBoundingClientRect()
+      const containerCenter = containerRect.left + containerRect.width / 2
+
+      items.forEach((item, index) => {
+        const itemRect = item.getBoundingClientRect()
+        const itemCenter = itemRect.left + itemRect.width / 2
+        const distance = Math.abs(itemCenter - containerCenter)
+        
+        if (distance < itemRect.width / 2) {
+          setActiveProjectIndex(index)
+        }
+      })
+    }
+
+    container.addEventListener('scroll', handleScroll)
+    return () => container.removeEventListener('scroll', handleScroll)
+  }, [shuffledProjects])
+
   if (!fontsLoaded) {
     return (
       <div className="min-h-screen bg-[#F3F3F7] flex items-center justify-center">
@@ -229,12 +305,12 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
               <div className="flex items-start gap-4">
                 <div className="flex-1">
                   <h1 className="text-[2.75rem] sm:text-5xl md:text-8xl font-black leading-none mb-4 md:mb-6 tracking-tighter relative">
-                    {sections?.hero?.title?.first}
-                    <br />
-                    <span className="holo-text">{sections?.hero?.title?.second}</span>
-                  </h1>
-                </div>
-                
+                  {sections?.hero?.title?.first}
+                  <br />
+                  <span className="holo-text">{sections?.hero?.title?.second}</span>
+                </h1>
+              </div>
+
                 {/* Mobile hero photo - rotating */}
                 <a
                   href={socialLinks.instagram.url}
@@ -376,9 +452,9 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
           </h2>
 
           {/* Mobile: Horizontal carousel */}
-          <div className="md:hidden">
-            <div className="overflow-x-auto overflow-y-visible pb-8 snap-x snap-mandatory scroll-smooth scrollbar-hide">
-              <div className="flex gap-4 px-4 py-2">
+          <div className="md:hidden -mx-4">
+            <div ref={workScrollRef} className="overflow-x-auto overflow-y-visible pb-8 snap-x snap-mandatory scroll-smooth scrollbar-hide">
+              <div className="flex gap-4 pl-4 pr-4 py-2">
                 {workExperience.map((job, index) => (
                   <a 
                     key={index} 
@@ -450,10 +526,16 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
             {/* Scroll indicator dots */}
             <div className="flex justify-center gap-2 mt-2">
               {workExperience.map((_, index) => (
-                <div 
-                  key={index} 
-                  className="w-2 h-2 rounded-full bg-gray-300"
-                ></div>
+                <button
+                  key={index}
+                  onClick={() => scrollToWorkItem(index)}
+                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                    activeWorkIndex === index 
+                      ? 'bg-[#667eea] w-6' 
+                      : 'bg-gray-300 hover:bg-gray-400'
+                  }`}
+                  aria-label={`Go to work experience ${index + 1}`}
+                />
               ))}
             </div>
           </div>
@@ -484,12 +566,12 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
                         
                         <div className="flex-1">
                           <h3 className="text-lg md:text-xl font-bold font-karrik text-[#1C1B22] leading-tight">
-                            {job.position}
-                          </h3>
+                    {job.position}
+                  </h3>
                           {/* Company on mobile - shown inline */}
                           <div className="text-sm font-semibold text-gray-700 md:hidden mt-1">
-                            {job.company}
-                          </div>
+                    {job.company}
+                  </div>
                         </div>
                       </div>
                       
@@ -498,8 +580,8 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
                       
                       {/* Description */}
                       <p className="text-xs md:text-sm leading-relaxed text-gray-600 ml-6 md:ml-0">
-                        {job.description}
-                      </p>
+                    {job.description}
+                  </p>
                     </div>
                     
                     {/* Left column - Company on desktop */}
@@ -574,14 +656,14 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
       {/* Projects */}
       <section id="projects" className="px-8 py-16 md:py-24 border-t-2 relative z-10">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-black mb-12 tracking-tight relative">
+                      <h2 className="text-3xl md:text-4xl font-black mb-12 tracking-tight relative">
             {sections?.projects?.title?.first} <span className="holo-text-projects">{sections?.projects?.title?.second}</span>
             <div className="absolute -bottom-2 left-0 w-24 h-1 holo-gradient-projects"></div>
           </h2>
 
           {/* Mobile: Horizontal carousel */}
           <div className="md:hidden -mx-8">
-            <div className="overflow-x-auto overflow-y-visible pb-8 snap-x snap-mandatory scroll-smooth scrollbar-hide">
+            <div ref={projectScrollRef} className="overflow-x-auto overflow-y-visible pb-8 snap-x snap-mandatory scroll-smooth scrollbar-hide">
               <div className="flex gap-4 pl-8 pr-8 py-2">
                 {shuffledProjects.map((project, index) => (
                   <a
@@ -652,10 +734,16 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
             {/* Scroll indicator dots */}
             <div className="flex justify-center gap-2 mt-2">
               {shuffledProjects.map((_, index) => (
-                <div 
-                  key={index} 
-                  className="w-2 h-2 rounded-full bg-gray-300"
-                ></div>
+                <button
+                  key={index}
+                  onClick={() => scrollToProjectItem(index)}
+                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                    activeProjectIndex === index 
+                      ? 'bg-[#667eea] w-6' 
+                      : 'bg-gray-300 hover:bg-gray-400'
+                  }`}
+                  aria-label={`Go to project ${index + 1}`}
+                />
               ))}
             </div>
           </div>
@@ -714,7 +802,7 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
                     {/* Tech with arrow */}
                     <div className="flex items-center justify-between">
                       <div className="text-[10px] font-medium uppercase tracking-wider text-gray-400">
-                        {project.tech}
+                    {project.tech}
                       </div>
                       <ArrowUpRight size={16} className="text-gray-400 group-hover:text-[#667eea] transition-colors duration-300" />
                     </div>
