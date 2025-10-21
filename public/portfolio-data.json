@@ -183,7 +183,8 @@
         "branch": "main",
         "theme": "dark",
         "token": "",
-        "className": "min-h-[600px]"
+        "className": "min-h-[600px]",
+        "basePath": "blog"
       },
       "githubLink": "echo",
       "githubButtonText": "VIEW ALL BLOG POSTS ON GITHUB"
@@ -209,7 +210,8 @@
         "branch": "main",
         "theme": "light",
         "token": "",
-        "className": "min-h-[600px]"
+        "className": "min-h-[600px]",
+        "basePath": "articles"
       },
       "githubLink": "articles",
       "githubButtonText": "VIEW ALL ARTICLES ON GITHUB"
