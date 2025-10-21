@@ -12,7 +12,11 @@ interface MarkdownsPeekViewerProps {
   theme?: 'light' | 'dark'
   token?: string
   disableStyles?: boolean
-  className?: string
+  className?: string,
+  loadFirstFileAutomatically?: boolean,
+  hideFilesOnRoute?: boolean,
+  basePath?: string,
+  height?: string
 }
 
 declare global {
@@ -30,7 +34,11 @@ export default function MarkdownsPeekViewer({
   theme = 'light',
   token = '',
   disableStyles = false,
-  className = ''
+  className = '',
+  loadFirstFileAutomatically = false,
+  hideFilesOnRoute = false,
+  basePath = '',
+  height = '600px',
 }: MarkdownsPeekViewerProps) {
   const { isLoaded, isLoading } = useMarkdownsPeek()
   const viewerRef = useRef<any>(null)
@@ -48,7 +56,11 @@ export default function MarkdownsPeekViewer({
       branch,
       theme,
       token,
-      disableStyles
+      disableStyles,
+      loadFirstFileAutomatically,
+      hideFilesOnRoute,
+      basePath,
+      height
     })
 
     return () => {
@@ -56,7 +68,7 @@ export default function MarkdownsPeekViewer({
         viewerRef.current.destroy()
       }
     }
-  }, [isLoaded, containerId, owner, repo, path, branch, theme, token, disableStyles])
+  }, [isLoaded, containerId, owner, repo, path, branch, theme, token, disableStyles, loadFirstFileAutomatically, hideFilesOnRoute, basePath, height])
 
   useEffect(() => {
     if (isLoaded && viewerRef.current && typeof viewerRef.current.setRepository === 'function') {

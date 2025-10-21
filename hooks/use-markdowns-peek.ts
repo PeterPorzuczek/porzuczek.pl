@@ -18,7 +18,7 @@ export function useMarkdownsPeek() {
       try {
         // Load the script dynamically
         const script = document.createElement('script')
-        script.src = 'https://unpkg.com/markdowns-peek@1.0.1/dist/markdowns-peek.js'
+        script.src = 'https://unpkg.com/markdowns-peek@1.0.15/dist/markdowns-peek.js'
         script.async = true
         
         script.onload = () => {

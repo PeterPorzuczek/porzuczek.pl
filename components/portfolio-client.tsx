@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react"
 import { Github, Linkedin, Instagram, ExternalLink, ArrowUpRight, ChevronUp, Menu, X } from "lucide-react"
 import MarkdownsPeekViewer from './markdowns-peek-viewer'
+import { useFreshData } from '@/hooks/use-fresh-data'
 
 export default function PortfolioClient({ data: initialData }: { data: any }) {
   const [data, setData] = useState(initialData);
@@ -20,29 +21,7 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
   const projectScrollRef = useRef<HTMLDivElement>(null)
 
   // Fetch fresh data from GitHub after component mounts
-  useEffect(() => {
-    const fetchFreshData = async () => {
-      try {
-        const remoteDataUrl = `https://raw.githubusercontent.com/PeterPorzuczek/porzuczek.pl/refs/heads/main/public/portfolio-data.json?v=${new Date().getTime()}`;
-        const response = await fetch(remoteDataUrl);
-        if (response.ok) {
-          const freshData = await response.json();
-          // Update copyright year
-          if (freshData?.contactInfo?.footer) {
-            freshData.contactInfo.footer.copyright = `© ${new Date().getFullYear()} PIOTR PORZUCZEK`;
-          }
-          setData(freshData);
-          console.log('Successfully fetched fresh data from GitHub.');
-        } else {
-          console.warn('Failed to fetch fresh data, using initial data.');
-        }
-      } catch (error) {
-        console.warn('Error fetching fresh data, using initial data:', error);
-      }
-    };
-
-    fetchFreshData();
-  }, []);
+  useFreshData(setData)
 
     const {
     personalInfo,
@@ -78,6 +57,23 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
     
     checkFonts()
   }, [])
+
+  // Scroll to hash section after page loads (from 404 redirect)
+  useEffect(() => {
+    if (!fontsLoaded) return
+
+    const hash = window.location.hash
+    if (hash) {
+      // Wait a bit for content to render
+      setTimeout(() => {
+        const elementId = hash.replace('#', '')
+        const element = document.getElementById(elementId)
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        }
+      }, 300)
+    }
+  }, [fontsLoaded])
 
   // Initialize and rotate photos
   useEffect(() => {
@@ -420,6 +416,7 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
                 theme={sections.blog.markdownsPeek.theme}
                 token={sections.blog.markdownsPeek.token}
                 className={sections.blog.markdownsPeek.className}
+                basePath={sections.blog.markdownsPeek.basePath}
               />
               <div className="relative w-100 h-1 holo-gradient-blog"></div>
               </div>
@@ -630,6 +627,7 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
                 theme={sections.articles.markdownsPeek.theme}
                 token={sections.articles.markdownsPeek.token}
                 className={sections.articles.markdownsPeek.className}
+                basePath={sections.articles.markdownsPeek.basePath}
               />
               <div className="relative w-100 h-1 holo-gradient-articles"></div>
             </div>
@@ -868,7 +866,7 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
                     className="block text-sm font-bold uppercase tracking-wider hover:underline relative group flex items-center pl-6"
                   >
                     {socialLinks.github.display}
-                    <div className="absolute left-0 w-2 h-2 holo-dot opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div className="absolute left-0 w-2 h-2 holo-dot"></div>
                   </a>
                   <a
                     href={socialLinks.linkedin.url}
@@ -877,7 +875,7 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
                     className="block text-sm font-bold uppercase tracking-wider hover:underline relative group flex items-center pl-6"
                   >
                     {socialLinks.linkedin.display}
-                    <div className="absolute left-0 w-2 h-2 holo-dot-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div className="absolute left-0 w-2 h-2 holo-dot-2"></div>
                   </a>
                   <a
                     href={socialLinks.instagram.url}
@@ -886,7 +884,7 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
                     className="block text-sm font-bold uppercase tracking-wider hover:underline relative group flex items-center pl-6"
                   >
                     {socialLinks.instagram.display}
-                    <div className="absolute left-0 w-2 h-2 holo-dot-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div className="absolute left-0 w-2 h-2 holo-dot-3"></div>
                   </a>
                 </div>
               </div>
