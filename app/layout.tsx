@@ -1,6 +1,7 @@
 import type React from "react"
 import type { Metadata } from "next"
 import { JetBrains_Mono } from "next/font/google"
+import Script from "next/script"
 import "./globals.css"
 import { getPortfolioData } from "@/lib/portfolio-data"
 
@@ -28,7 +29,26 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={jetbrainsMono.className}>{children}</body>
+      <head>
+        <Script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=UA-160110136-1"
+        />
+        <Script
+          id="google-analytics"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'UA-160110136-1');
+            `,
+          }}
+        />
+      </head>
+      <body className={jetbrainsMono.className}>
+        {children}
+      </body>
     </html>
   )
 }
