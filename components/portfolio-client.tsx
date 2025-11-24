@@ -17,6 +17,7 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
   const [mobilePhotoTransition, setMobilePhotoTransition] = useState(true)
   const [activeWorkIndex, setActiveWorkIndex] = useState(0)
   const [activeProjectIndex, setActiveProjectIndex] = useState(0)
+  const [showAllWorkExperience, setShowAllWorkExperience] = useState(false)
   const workScrollRef = useRef<HTMLDivElement>(null)
   const projectScrollRef = useRef<HTMLDivElement>(null)
 
@@ -455,7 +456,7 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
                  {workExperience.map((job: any, index: number) => (
                   <a 
                     key={index} 
-                    href={socialLinks.linkedin.url}
+                    href={job.url || socialLinks.linkedin.url}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="block relative group cursor-pointer transition-all duration-300 flex-shrink-0 w-[85vw] snap-center"
@@ -539,10 +540,10 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
           
           {/* Desktop: Vertical list */}
           <div className="hidden md:block space-y-6">
-                 {workExperience.map((job: any, index: number) => (
+                 {(showAllWorkExperience ? workExperience : workExperience.slice(0, 3)).map((job: any, index: number) => (
               <a 
                 key={index} 
-                href={socialLinks.linkedin.url}
+                href={job.url || socialLinks.linkedin.url}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block relative group cursor-pointer transition-all duration-300 hover:-translate-y-1"
@@ -604,6 +605,26 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
                 </div>
               </a>
             ))}
+            
+            {/* Show more/less button - only if more than 3 items */}
+            {workExperience.length > 3 && (
+              <button
+                onClick={() => setShowAllWorkExperience(!showAllWorkExperience)}
+                className="w-full mt-6 py-3 px-6 rounded-lg text-sm font-bold text-[#1C1B22] hover:text-[#667eea] transition-all duration-300 flex items-center justify-center gap-2 group"
+              >
+                {showAllWorkExperience ? (
+                  <>
+                    <ChevronUp size={16} className="group-hover:-translate-y-1 transition-transform" />
+                    SHOW LESS
+                  </>
+                ) : (
+                  <>
+                    <ChevronUp size={16} className="rotate-180 group-hover:translate-y-1 transition-transform" />
+                    SHOW MORE ({workExperience.length - 3} MORE)
+                  </>
+                )}
+              </button>
+            )}
           </div>
         </div>
       </section>

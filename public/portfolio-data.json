@@ -128,7 +128,8 @@
       "company": "LYRECO GROUP",
       "description": "WORKING ON VUE COMPONENTS, PLANNING WORK FOR TEAM, CREATING SPACES FOR DISCUSSION ON SOFTWARE SOLUTIONS, HELPING BUSINESS PREPARE DEVELOPMENT PLANS.",
       "technologies": "VUE.JS / LEADERSHIP / E-COMMERCE",
-      "accent": "holo-dot"
+      "accent": "holo-dot",
+      "url": "https://linkedin.com/in/piotrporzuczek"
     },
     {
       "period": "2018—NOW",
@@ -136,7 +137,8 @@
       "company": "UNIVERSITY OF GDANSK",
       "description": "PREPARING EDUCATIONAL PROGRAMME, PLANNING AND LEADING CLASSES, PUBLISHING RESEARCH PAPERS, CREATED TIMERIDDLE PLATFORM.",
       "technologies": "EDUCATION / RESEARCH / SPRING / JAVA",
-      "accent": "holo-dot-2"
+      "accent": "holo-dot-2",
+      "url": "https://linkedin.com/in/piotrporzuczek"
     },
     {
       "period": "2018—2022",
@@ -144,7 +146,18 @@
       "company": "STAPLES SOLUTIONS",
       "description": "LED MIGRATION FROM LEGACY XSL/JSP TO MODERN VUE.JS FRAMEWORK. WORKED IN 100+ SPRINTS, CREATED CUSTOM COMPONENTS, DEVELOPED CI/CD PIPELINE.",
       "technologies": "VUE.JS / LEGACY MIGRATION / SCRUM",
-      "accent": "holo-dot-3"
+      "accent": "holo-dot-3",
+      "url": "https://linkedin.com/in/piotrporzuczek"
+    },
+    {
+      "period": "2022—NOW",
+      "position": "FOUNDER",
+      "company": "3809940TAA",
+      "description": "DIGITAL SYSTEMS FOR DEMANDING TEAMS. PRECISE DESIGN AND SOFTWARE IMPLEMENTATION. ONE STUDIO RESPONSIBLE FOR ARCHITECTURE, CODE AND INTERFACE.",
+      "technologies": " SOFTWARE DEVELOPMENT / DESIGN",
+      "accent": "holo-dot",
+      "linkedin": "https://linkedin.com/in/piotrporzuczek",
+      "url": "https://neo-3809940taa.github.io/"
     }
   ],
   "navigation": [
