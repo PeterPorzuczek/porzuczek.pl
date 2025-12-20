@@ -916,7 +916,7 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
                   <div className="absolute -bottom-1 left-0 w-16 h-0.5 holo-gradient-status"></div>
                 </h3>
                 <div className="text-sm font-bold uppercase tracking-wider relative flex items-center pl-6">
-                  {personalInfo.status}
+                  <div dangerouslySetInnerHTML={{ __html: personalInfo.status }} />
                   <div className="absolute left-0 w-2 h-2 holo-pulse"></div>
                 </div>
               </div>
