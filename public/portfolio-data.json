@@ -13,7 +13,7 @@
     ],
     "location": "GDAŃSK, POLAND",
     "email": "ADMIN@PORZUCZEK.PL",
-    "status": "Currently working on Lyreco.se UI components"
+    "status": "Currently working on <a href='https://lyreco.se' style='text-decoration: underline;' target='_blank'>Lyreco.se</a> & <a href='https://lyreco.no' style='text-decoration: underline;' target='_blank'>Lyreco.no</a> UI components"
   },
   "loadingScreen": {
     "title": "π.PORZUCZEK.PL",
