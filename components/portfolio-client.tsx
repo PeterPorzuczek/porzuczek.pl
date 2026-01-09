@@ -418,6 +418,8 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
                 token={sections.blog.markdownsPeek.token}
                 className={sections.blog.markdownsPeek.className}
                 basePath={sections.blog.markdownsPeek.basePath}
+                reverseSortOrder={sections.blog.markdownsPeek.reverseSortOrder}
+                sortAlphabetically={sections.blog.markdownsPeek.sortAlphabetically}
               />
               <div className="relative w-100 h-1 holo-gradient-blog"></div>
               </div>
@@ -649,6 +651,8 @@ export default function PortfolioClient({ data: initialData }: { data: any }) {
                 token={sections.articles.markdownsPeek.token}
                 className={sections.articles.markdownsPeek.className}
                 basePath={sections.articles.markdownsPeek.basePath}
+                reverseSortOrder={sections.articles.markdownsPeek.reverseSortOrder}
+                sortAlphabetically={sections.articles.markdownsPeek.sortAlphabetically}
               />
               <div className="relative w-100 h-1 holo-gradient-articles"></div>
             </div>

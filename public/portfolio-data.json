@@ -206,7 +206,9 @@
         "theme": "dark",
         "token": "",
         "className": "min-h-[600px]",
-        "basePath": "blog"
+        "basePath": "blog",
+        "reverseSortOrder": false,
+        "sortAlphabetically": false
       },
       "githubLink": "echo",
       "githubButtonText": "VIEW ALL BLOG POSTS ON GITHUB"
@@ -233,7 +235,9 @@
         "theme": "light",
         "token": "",
         "className": "min-h-[600px]",
-        "basePath": "articles"
+        "basePath": "articles",
+        "reverseSortOrder": true,
+        "sortAlphabetically": true
       },
       "githubLink": "articles",
       "githubButtonText": "VIEW ALL ARTICLES ON GITHUB"

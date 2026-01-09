@@ -16,7 +16,9 @@ interface MarkdownsPeekViewerProps {
   loadFirstFileAutomatically?: boolean,
   hideFilesOnRoute?: boolean,
   basePath?: string,
-  height?: string
+  height?: string,
+  reverseSortOrder: boolean,
+  sortAlphabetically: boolean,
 }
 
 declare global {
@@ -39,6 +41,8 @@ export default function MarkdownsPeekViewer({
   hideFilesOnRoute = false,
   basePath = '',
   height = '600px',
+  reverseSortOrder = false,
+  sortAlphabetically = false,
 }: MarkdownsPeekViewerProps) {
   const { isLoaded, isLoading } = useMarkdownsPeek()
   const viewerRef = useRef<any>(null)
@@ -60,7 +64,9 @@ export default function MarkdownsPeekViewer({
       loadFirstFileAutomatically,
       hideFilesOnRoute,
       basePath,
-      height
+      height,
+      reverseSortOrder,
+      sortAlphabetically
     })
 
     return () => {
