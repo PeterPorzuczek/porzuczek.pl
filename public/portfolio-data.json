@@ -128,13 +128,13 @@
       "image": "https://i.imgur.com/fogEBZP.png"
     },
     {
-      "name": "PORZUCZEK.PL",
-      "description": "PERSONAL WEBSITE",
-      "tech": "REACT",
-      "url": "https://github.com/PeterPorzuczek/porzuczek.pl",
-      "year": "2024",
+      "name": "TP-7 WAV EDITOR",
+      "description": "TEMPO, CUE POINTS, MULTITRACK EXPORT FOR TEENAGE ENGINEERING TP-7, ON WINDOWS",
+      "tech": "C#",
+      "url": "https://github.com/PeterPorzuczek/tp7-wav-editor-win",
+      "year": "2026",
       "accent": "holo-green",
-      "image": "https://i.imgur.com/LqjFvMi.png"
+      "image": "https://i.imgur.com/19a7Auf.png"
     }
   ],
   "workExperience": [
